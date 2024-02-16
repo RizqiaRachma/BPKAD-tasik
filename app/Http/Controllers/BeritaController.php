@@ -13,10 +13,10 @@ class BeritaController extends Controller
         // Validasi input
         $request->validate([
             'judul' => 'required|unique:beritas,judul',
-            'foto' => 'nullable|mimes:png|max:10240',
+            'foto' => 'nullable|mimes:png,jpeg,jpg|max:10240',
         ], [
             'judul.unique' => 'Judul berita sudah ada, mohon masukkan Judul berita yang berbeda.',
-            'foto.mimes' => 'Foto harus berformat PNG.',
+            'foto.mimes' => 'Foto harus berformat PNG,JPEG,JPG',
             'foto.max' => 'Foto tidak boleh lebih dari 10 MB.',
         ]);
 
