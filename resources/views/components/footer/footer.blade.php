@@ -8,10 +8,10 @@
                     </div>
                     <div class="col p-0 d-flex align-items-center justify-content-center">
                         <p class="d-none d-xxl-block h2 text-white ">
-                            BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH KOTA TASIKMALAYA
+                            BADAN PENGELOLA KEUANGAN DAN ASET DAERAH KOTA TASIKMALAYA
                         </p>
                         <p class="d-block d-xxl-none h2 text-white ">
-                            BADAN PENGELOLAAN KEUANGAN DAN ASET DAERAH KOTA TASIKMALAYA
+                            BADAN PENGELOLA KEUANGAN DAN ASET DAERAH KOTA TASIKMALAYA
                         </p>
                     </div>
                 </div>
@@ -44,18 +44,18 @@
                 </div>
                 <div class="col-12 col-xxl-5 px-0  mt-3 mt-lg-0">
                     <p class="h4 text-white">TINGGALKAN PESAN</p>
-                    @if(session('success'))
-                    <div class="alert alert-danger">
-                        {{ session('success') }}
-                    </div>
+                    @if (session('success'))
+                        <div class="alert alert-danger">
+                            {{ session('success') }}
+                        </div>
                     @endif
-                    
+
                     <form class="row w-100" id="footer-form" action="{{ route('pesan.simpan') }}" method="post">
-                            @csrf
+                        @csrf
                         <div class="col-12 col-lg-6">
                             <div class="input-wrapper-pesan">
-                                <input autocomplete="off" class="input-pesan" name="nama_pemohon" type="text" id="nama" required
-                                    placeholder="Nama" />
+                                <input autocomplete="off" class="input-pesan" name="nama_pemohon" type="text"
+                                    id="nama" required placeholder="Nama" />
                                 <label class="label-pesan" for="nama">
                                     Nama
                                 </label>
@@ -63,8 +63,8 @@
                         </div>
                         <div class="col-12 col-lg-6">
                             <div class="input-wrapper-pesan">
-                                <input autocomplete="off" class="input-pesan" name="email" type="email" id="email" required
-                                    placeholder="E-mail" />
+                                <input autocomplete="off" class="input-pesan" name="email" type="email" id="email"
+                                    required placeholder="E-mail" />
                                 <label class="label-pesan" for="email">
                                     Alamat Email
                                 </label>
@@ -72,7 +72,8 @@
                         </div>
                         <div class="col-12 ">
                             <div class="input-wrapper-pesan">
-                                <textarea required autocomplete="off" name="pesan" class="textarea-pesan" name="pesan" id="pesan" placeholder="Masukan Pesan"></textarea>
+                                <textarea required autocomplete="off" name="pesan" class="textarea-pesan" name="pesan" id="pesan"
+                                    placeholder="Masukan Pesan"></textarea>
                                 <label class="label-pesan" for="pesan">
                                     Masukan Pesan </label>
                             </div>
@@ -98,7 +99,8 @@
                             class="col-6 col-xxl-12 h5 text-white fw-lighter text-decoration-none link-tautan">SP4N
                             LAPOR</a>
                         <a href="https://portal.tasikmalayakota.go.id/"
-                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL TASIKAMALAYA</a>
+                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL
+                            TASIKAMALAYA</a>
                     </div>
                 </div>
             </div>
@@ -107,7 +109,11 @@
         <div class="col-12 overflow-hidden">
 
 
-            <p id="copyright" class="bottom-0 text-center">© <script>document.write(new Date().getFullYear())</script> DISKOMINFO Kota Tasikmalaya. All Right Reserved</p>
+            <p id="copyright" class="bottom-0 text-center">©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> DISKOMINFO Kota Tasikmalaya. All Right Reserved
+            </p>
         </div>
 
     </footer>
