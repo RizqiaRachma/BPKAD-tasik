@@ -59,6 +59,10 @@ Route::get('/informasi_publik/renstra', function () {
     $informasi = Informasi::where('tipe', 'Renstra')->paginate(5);
     return view('landing.informasi_publik.renstra.renstra', ['informasi' => $informasi]);
 })->name('renstra');
+Route::get('/informasi_publik', function () {
+    $berita = Berita::paginate(12);
+    return view('landing.informasi_publik.informasi_publik', ['berita' => $berita]);
+})->name('renstra');
 
 Route::get('/informasi_publik/renja', function () {
     $informasi = Informasi::where('tipe', 'Renja')->paginate(5);

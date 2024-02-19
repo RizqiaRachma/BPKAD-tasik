@@ -6,8 +6,9 @@
                 <li class="breadcrumb-item active " aria-current="page">Tugas & Fungsi</li>
             </ol>
         </nav>
-        <div class="text-white d-flex justify-content-center align-items-center ">
-            <embed width="100%" height="650" src="https://www.bpkad.tasikmalayakota.go.id/uploads/dokumen/2021PW327826076_TUGAS_POKOK_DAN_RTU_BPKAD1.pdf"
+        <div class="text-white d-flex justify-content-center align-items-center bg-white w-100 h-100">
+            <embed width="100%" height="650"
+                src="https://www.bpkad.tasikmalayakota.go.id/uploads/dokumen/2021PW327826076_TUGAS_POKOK_DAN_RTU_BPKAD1.pdf"
                 type="application/pdf">
         </div>
     </div>

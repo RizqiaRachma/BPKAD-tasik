@@ -6,8 +6,8 @@
                 <li class="breadcrumb-item active " aria-current="page">Struktur Organisasi</li>
             </ol>
         </nav>
-        <div class="text-white d-flex justify-content-center align-items-center ">
-            <img src="/img/pegawai-BPKAD.png" class="image" alt="">
+        <div class="text-white d-flex justify-content-center align-items-center">
+            <img src="/img/pegawai-BPKAD.png" class="img-fluid" alt="">
         </div>
     </div>
 @endsection

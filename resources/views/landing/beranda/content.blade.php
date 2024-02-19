@@ -60,10 +60,11 @@
                 <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
                     <div class="card bg-white card-berita mx-auto">
                         <div class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                            <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}" style="width: 80%;">
+                            <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}"
+                                style="width: 80%; object-fit:cover">
                         </div>
                         <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
-                            <small>{{ $x->kategori }}</small>
+                            <small class=""><a class="link-dark" href="#">{{ $x->kategori }}</a></small>
                             <p class="h5 fw-semibold my-2">
                                 {{ Str::limit($x->judul, 40) }}
                             </p>

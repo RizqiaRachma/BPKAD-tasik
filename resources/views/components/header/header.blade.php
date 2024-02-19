@@ -36,8 +36,8 @@
                 </li>
                 <li class="nav-item ">
 
-                    <a class="nav-link link-light drounded-0 text-white fs-5" aria-expanded="false"
-                        aria-controls="informasipublik">
+                    <a class="nav-link link-light rounded-0 text-white fs-5" aria-expanded="false"
+                        aria-controls="informasipublik" href="/informasi_publik">
                         Informasi Publik
                     </a>
 
@@ -122,8 +122,8 @@
                 </ul>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link link-light  rounded-0 text-white fs-5" href="#" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">Informasi Publik</a>
+                <a class="nav-link link-light  rounded-0 text-white fs-5" href="/informasi_publik"
+                    aria-expanded="false">Informasi Publik</a>
 
             </li>
             <li class="nav-item ">
