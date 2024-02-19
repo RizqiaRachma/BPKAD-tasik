@@ -26,7 +26,7 @@
                         @foreach ($foto as $x)
                             <a class="spotlight col-12 col-md-6 col-xl-4 col-xxl-3 d-flex justify-content-center"
                                 href="{{ asset($x->foto) }}" data-title="{{ asset($x->ket) }}" data-fit="contain">
-                                <img src="{{ asset($x->foto) }}" class="object-fit-contain">
+                                <img src="{{ asset($x->foto) }}" class="object-fit-contain img-fluid">
                             </a>
                         @endforeach
                     </div>
@@ -77,11 +77,12 @@
                             b2KXsyoaBF4
                             --}}
                         @foreach ($video as $x)
-                            <a class="video-spotlight col-12 col-md-6 col-xl-4 " data-video-id="{{ $x->youtube }}">
+                            <a class="video-spotlight col-12 col-md-6 col-xl-4 col-xxl-3 "
+                                data-video-id="{{ $x->youtube }}">
                                 <img src="https://img.youtube.com/vi/{{ $x->youtube }}/hqdefault.jpg"
-                                    alt="https://www.youtube.com/embed/{{ $x->youtube }}" ">
-                                                                                </a>
-     @endforeach
+                                    alt="https://www.youtube.com/{{ $x->youtube }}" class="img-fluid">
+                            </a>
+                        @endforeach
                     </div>
                     <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
                         <nav aria-label="Page navigation example">
