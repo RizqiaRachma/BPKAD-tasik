@@ -16,6 +16,8 @@
     },
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^41.0.0",
-        "bs5-lightbox": "^1.8.3"
+        "bs5-lightbox": "^1.8.3",
+        "fslightbox": "^3.4.1",
+        "spotlight.js": "^0.7.8"
     }
 }

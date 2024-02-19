@@ -22,9 +22,34 @@
     </main>
     @yield('footer')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <!-- Add this script in your HTML file -->
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var videoLinks = document.querySelectorAll('.video-spotlight');
+
+            videoLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var videoId = this.getAttribute('data-video-id');
+                    Spotlight.show([{
+                        media: "node",
+                        autohide: "false",
+                        controls: "true",
+                        src: (function() {
+                            const iframe = document.createElement("iframe");
+                            iframe.src = "https://www.youtube.com/embed/" +
+                                videoId;
+
+                            iframe.style.width = '80%';
+                            iframe.style.height = '75%';
+                            return iframe;
+                        }())
+                    }]);
+                });
+            });
+        });
+    </script>
 
 
 </body>
