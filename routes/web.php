@@ -5,6 +5,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\KategoriInformasiController;
+use App\Http\Controllers\KategoriRegulasiController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\RegulasiController;
@@ -13,6 +15,8 @@ use App\Models\Berita;
 use App\Models\Foto;
 use App\Models\Informasi;
 use App\Models\Kategori_berita;
+use App\Models\Kategori_informasi;
+use App\Models\Kategori_regulasi;
 use App\Models\Pesan;
 use App\Models\Regulasi;
 use App\Models\Video;
@@ -33,12 +37,28 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', function () {
+    $response_berita = Http::get('https://portal.tasikmalayakota.go.id/api/berita');
+    $berita = $response_berita->json(); // Mengubah respon ke format JSON
+    $beritaLimited = array_slice($berita['items'], 0, 4);
+
+    $response_pengumuman = Http::get('https://portal.tasikmalayakota.go.id/api/pengumuman');
+    $pengumuman = $response_pengumuman->json(); // Mengubah respon ke format JSON
+    $pengumumanLimited = array_slice($pengumuman['items'], 0, 4);
+
     $berita = Berita::all();
-    return view('landing.beranda.beranda', ['berita' => $berita]);
+    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumumanLimited', 'berita'));
 });
 Route::get('/beranda', function () {
+    $response_berita = Http::get('https://portal.tasikmalayakota.go.id/api/berita');
+    $berita = $response_berita->json(); // Mengubah respon ke format JSON
+    $beritaLimited = array_slice($berita['items'], 0, 4);
+
+    $response_pengumuman = Http::get('https://portal.tasikmalayakota.go.id/api/pengumuman');
+    $pengumuman = $response_pengumuman->json(); // Mengubah respon ke format JSON
+    $pengumumanLimited = array_slice($pengumuman['items'], 0, 4);
+
     $berita = Berita::all();
-    return view('landing.beranda.beranda', ['berita' => $berita]);
+    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumumanLimited', 'berita'));
 })->name('beranda');
 
 Route::post('/pesan-simpan', [PesanController::class, 'submitForm'])->name('pesan.simpan');
@@ -220,6 +240,14 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/foto-update/{id}', [FotoController::class, 'update'])->name('foto.update');
     Route::delete('/foto-delete/{id}', [FotoController::class, 'destroy'])->name('foto.delete');
 
+    Route::get('/dashboard/informasi_publik/kategori', function () {
+        $kategori = Kategori_informasi::paginate(5);
+        return view('dashboard.informasi_publik.kategori.kategori_informasi', ['kategori' => $kategori]);
+    });
+    Route::post('/kategori-informasi-simpan', [KategoriInformasiController::class, 'tambah'])->name('kategori_informasi.simpan');
+    Route::put('/kategori-informasi-update/{id}', [KategoriInformasiController::class, 'update'])->name('kategori_informasi.update');
+    Route::delete('/kategori-informasi-delete/{id}', [KategoriInformasiController::class, 'destroy'])->name('kategori_informasi.delete');
+
     Route::get('/dashboard/informasi_publik', function () {
         $informasi = Informasi::paginate(5);
         return view('dashboard.informasi_publik.informasi_publik', ['informasi' => $informasi]);
@@ -228,6 +256,15 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/informasi-update/{id}', [InformasiController::class, 'update'])->name('informasi.update');
     Route::delete('/informasi-delete/{id}', [InformasiController::class, 'destroy'])->name('informasi.delete');
     Route::get('/informasi-cariDashboard', [InformasiController::class, 'cariDashboard'])->name('informasi.cariDashboard');
+
+
+    Route::get('/dashboard/regulasi/kategori', function () {
+        $kategori = Kategori_regulasi::paginate(5);
+        return view('dashboard.regulasi.kategori.kategori_regulasi', ['kategori' => $kategori]);
+    });
+    Route::post('/kategori-informasi-simpan', [KategoriRegulasiController::class, 'tambah'])->name('kategori_regulasi.simpan');
+    Route::put('/kategori-informasi-update/{id}', [KategoriRegulasiController::class, 'update'])->name('kategori_regulasi.update');
+    Route::delete('/kategori-informasi-delete/{id}', [KategoriRegulasiController::class, 'destroy'])->name('kategori_regulasi.delete');
 
     Route::get('/dashboard/regulasi', function () {
         $regulasi = Regulasi::paginate(5);

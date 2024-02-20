@@ -99,8 +99,9 @@
                             class="col-6 col-xxl-12 h5 text-white fw-lighter text-decoration-none link-tautan">SP4N
                             LAPOR</a>
                         <a href="https://portal.tasikmalayakota.go.id/"
-                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL
-                            TASIKAMALAYA</a>
+
+                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL TASIKMALAYA</a>
+
                     </div>
                 </div>
             </div>
