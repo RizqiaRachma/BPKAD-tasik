@@ -46,10 +46,38 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+            <div class="text-center h1 text-white mb-5">
+                Berita Seputar Kota Tasikmalaya
+            </div>
+            <br><br><br>
+            <div class="row gy-5">
+                @if($beritaLimited)
+                    @foreach ($beritaLimited as $dataBerita)
+                    <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
+                        <div class="card bg-white card-berita mx-auto">
+                            <div class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
+                                <img id="hat" src="https://portal.tasikmalayakota.go.id/assets/uploads/{{ $dataBerita['berita_cover'] }}" alt="{{ $x->judul }}" style="width: 80%;">
+                            </div>
+                            <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
+                                <small>Berita Seputar Kota Tasikmalaya</small>
+                                <p class="h5 fw-semibold my-2">
+                                    {{ Str::limit($dataBerita['berita_judul'], 40) }}
+                                </p>
+                                <p class="h6 fw-medium line-clamp">{!! Str::limit((strip_tags($dataBerita['berita_isi'])), 250) !!}</p>
+                            </div>
+                            <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita_detail/{{ $dataBerita['berita_id'] }}" class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover" target="_blank">
+                                <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
+                            </a>
+                        </div>
+                    </div>
+                    @endforeach
+                @else
+                    <p>Data berita tidak tersedia.</p>
+                @endif
+            </div>
         
         <div class="my-3 d-flex justify-content-center align-items-center">
-            <a href="/informasi_publik/berita" class="text-white  text-decoration-none h3 arrow-hover">Lihat Berita Lainnya
+            <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita" class="text-white  text-decoration-none h3 arrow-hover" target="_blank">Lihat Berita Lainnya
                 <span class="h4">
                     <i class="bi bi-chevron-right"></i></span></a>
         </div>
