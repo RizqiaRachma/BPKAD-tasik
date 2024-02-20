@@ -50,7 +50,7 @@
             </button>
         </div>
     </div>
-    <div class="container-fluid  container-beranda-berita">
+    <div class="container-fluid  container-beranda-berita ">
         <div class="text-center h1 text-white mb-5">
             Berita Terbaru
         </div>
@@ -85,45 +85,41 @@
                     <i class="bi bi-chevron-right"></i></span></a>
         </div>
     </div>
-    <div class="container-fluid  mt-5 px-5">
-        <div class="container ">
-            <div class="row text-center  g-3">
-                <div class="col-6 bg-dark bg-gradient  row">
-                    <a href="https://ppid.tasikmalayakota.go.id/" class="col hovered_card" aria-label="ppid">
-                        <img src="https://ppid.tasikmalayakota.go.id/wp-content/uploads/2020/09/logo-ppid-new-e1584340488959.png"
-                            alt="" style="width: 10rem">
-                    </a>
-                    <a href="http://esakip.tasikmalayakota.go.id/portal/home" class="col hovered_card align-self-center"
-                        aria-label="e-sakip">
-                        <img src="http://esakip.tasikmalayakota.go.id/css/images/logo_big.png" alt=""
-                            style="width: 15rem">
-                    </a>
-                    <a href="https://sispek.tasikmalayakota.go.id/" class="col hovered_card align-self-center"
-                        aria-label="sispek">
-                        <img src="https://sispek.tasikmalayakota.go.id/assets/img/SISPEK2.png" alt=""
-                            style="width: 10rem">
-                    </a>
-                </div>
-                <div class="col-6 bg-dark bg-gradient row text-start">
-                    <a href="https://lpse.tasikmalayakota.go.id/eproc4" class="col hovered_card align-self-center"
-                        aria-label="lpse">
-                        <img src="https://lpse.tasikmalayakota.go.id/eproc4/public/images/imgng/lpse-logo.png"
-                            alt="" style="width: 10rem">
-                    </a>
-                    <a href="https://www.lapor.go.id/tentang" class="col  hovered_card align-self-center"
-                        aria-label="sp4n">
-                        <img src="https://www.lapor.go.id/themes/lapor/assets/images/logo.png" alt=""
-                            style="width: 10rem">
-                    </a>
-                    <a href="https://portal.tasikmalayakota.go.id/" class="col hovered_card align-self-center"
-                        aria-label="portal kota tasikmalaya">
-                        <img src="https://portal.tasikmalayakota.go.id/assets/front/images/logo.png" alt=""
-                            style="width: 15rem">
-                    </a>
-                </div>
+    <div class="container-fluid  mt-5 px-5 ">
+        <div class="row text-center g-3 bg-dark bg-gradient rounded-3 pb-3">
+            <a href="https://ppid.tasikmalayakota.go.id/" class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2  hovered_card"
+                aria-label="ppid">
+                <img src="https://ppid.tasikmalayakota.go.id/wp-content/uploads/2020/09/logo-ppid-new-e1584340488959.png"
+                    alt="" style="width: 10rem">
+            </a>
+            <a href="http://esakip.tasikmalayakota.go.id/portal/home"
+                class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2  hovered_card align-self-center" aria-label="e-sakip">
+                <img src="http://esakip.tasikmalayakota.go.id/css/images/logo_big.png" alt="" style="width: 15rem">
+            </a>
+            <a href="https://sispek.tasikmalayakota.go.id/"
+                class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2  hovered_card align-self-center" aria-label="sispek">
+                <img src="https://sispek.tasikmalayakota.go.id/assets/img/SISPEK2.png" alt=""
+                    style="width: 10rem">
+            </a>
+            <a href="https://lpse.tasikmalayakota.go.id/eproc4"
+                class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2  hovered_card align-self-center" aria-label="lpse">
+                <img src="https://lpse.tasikmalayakota.go.id/eproc4/public/images/imgng/lpse-logo.png" alt=""
+                    style="width: 10rem">
+            </a>
+            <a href="https://www.lapor.go.id/tentang"
+                class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2   hovered_card align-self-center" aria-label="sp4n">
+                <img src="https://www.lapor.go.id/themes/lapor/assets/images/logo.png" alt=""
+                    style="width: 10rem">
+            </a>
+            <a href="https://portal.tasikmalayakota.go.id/"
+                class="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2  hovered_card align-self-center"
+                aria-label="portal kota tasikmalaya">
+                <img src="https://portal.tasikmalayakota.go.id/assets/front/images/logo.png" alt=""
+                    style="width: 15rem">
+            </a>
 
 
-            </div>
+
 
         </div>
 

@@ -44,9 +44,8 @@
 
                 </li>
                 <li class="nav-item ">
-
-                    <a class="nav-link link-light  rounded-0 text-white fs-5" data-bs-toggle="collapse" href="#"
-                        role="button" aria-expanded="false" aria-controls="regulasi">
+                    <a class="nav-link link-light  rounded-0 text-white fs-5" href="/produk_hukum" aria-expanded="false"
+                        aria-controls="regulasi">
                         Produk Hukum
                     </a>
 
@@ -127,7 +126,8 @@
 
             </li>
             <li class="nav-item ">
-                <a class="nav-link link-light rounded-0 text-white fs-5" href="#" aria-expanded="false">Produk
+                <a class="nav-link link-light rounded-0 text-white fs-5" href="/produk_hukum"
+                    aria-expanded="false">Produk
                     Hukum</a>
             </li>
             <li class="nav-item ">

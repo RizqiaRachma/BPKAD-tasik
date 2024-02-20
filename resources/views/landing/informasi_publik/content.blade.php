@@ -1,9 +1,10 @@
 @section('informasi_publik')
     <div class="position-relative px-5 mt-4">
         <div class="text-center">
-            <p class="h1 text-white"> Informasi Publik</p>
+            <p class="h1 text-white">Informasi Publik</p>
         </div>
         <div class="container-fluid d-flex justify-content-end mb-5">
+
 
             <form action="{{ route('berita.cari') }}" method="post">
                 @csrf
@@ -25,8 +26,6 @@
                 </div>
 
             </form>
-
-
         </div>
         <div class="container-fluid container-berita">
             <div class="row gy-5 ">
