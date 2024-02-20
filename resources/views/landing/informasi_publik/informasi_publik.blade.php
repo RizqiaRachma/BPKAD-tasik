@@ -11,17 +11,16 @@
 </head>
 
 <body>
-    @include('landing.beranda.content')
+    @include('landing.informasi_publik.content')
     @include('components.header.header')
     @include('components.footer.footer')
 
     @yield('header')
-    <main class="z-n1" style="min-height:50vh">
-        @yield('beranda')
+    <main class="position-relative" style="min-height:70vh;">
+        @yield('informasi_publik')
     </main>
     @yield('footer')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
 </body>
 
 </html>

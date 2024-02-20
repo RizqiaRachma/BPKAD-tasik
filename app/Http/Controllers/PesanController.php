@@ -48,7 +48,9 @@ class PesanController extends Controller
         //    'tiket'         => $kontak->tiket, // Ambil tiket yang telah disimpan
         //];
 
+
         return redirect(url()->previous() . '#footer')->with('success', new HtmlString('Pesan telah terkirim. <br> <h1>Tiket: ' . $kontak->tiket . '</h1> Silahkan cek jawaban di menu <a href="' . route('cek-tiket') . '">CEK TIKET</a>. Gunakan kode tiket di atas untuk melihat jawaban dari pesan Anda.'));
+
     }
 
 

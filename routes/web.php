@@ -80,6 +80,13 @@ Route::get('/informasi_publik/renstra', function () {
     return view('landing.informasi_publik.renstra.renstra', ['informasi' => $informasi]);
 })->name('renstra');
 
+//revisi
+Route::get('/informasi_publik', function () {
+    $berita = Berita::paginate(12);
+    return view('landing.informasi_publik.informasi_publik', ['berita' => $berita]);
+})->name('informasi_publik');
+
+//
 Route::get('/informasi_publik/renja', function () {
     $informasi = Informasi::where('tipe', 'Renja')->paginate(5);
     return view('landing.informasi_publik.renja.renja', ['informasi' => $informasi]);
@@ -126,6 +133,14 @@ Route::get('/regulasi/peraturan_daerah', function () {
     $regulasi = Regulasi::where('tipe', 'Peraturan Daerah')->paginate(5);
     return view('landing.regulasi.peraturan_daerah.peraturan_daerah', ['regulasi' => $regulasi]);
 });
+
+
+// revisi
+Route::get('/produk_hukum', function () {
+    $regulasi = Regulasi::where('tipe', 'Peraturan Daerah')->paginate(5);
+    return view('landing.regulasi.produk_hukum', ['regulasi' => $regulasi]);
+});
+//
 // Route::get('/regulasi/peraturan_daerah/nama-file', function () {
 //    return view('landing.regulasi.peraturan_daerah.detail.peraturan_daerah_detail');
 // });
