@@ -57,6 +57,11 @@
 
                 </li>
                 <li class="nav-item ">
+                    <a class="nav-link link-light rounded-0 text-white fs-5" href="/informasi_publik/berita"
+                        role="button">Berita</a>
+
+                </li>
+                <li class="nav-item ">
                     <a class="nav-link link-light rounded-0 text-white fs-5" href="#footer" role="button">Kontak</a>
                 </li>
                 <li class="nav-item ">
@@ -132,6 +137,11 @@
             </li>
             <li class="nav-item ">
                 <a class="nav-link link-light rounded-0 text-white fs-5" href="/galeri" role="button">Galeri</a>
+
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link link-light rounded-0 text-white fs-5" href="/informasi_publik/berita"
+                    role="button">Berita</a>
 
             </li>
             <li class="nav-item ">

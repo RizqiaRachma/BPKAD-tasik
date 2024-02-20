@@ -1,17 +1,15 @@
 @section('berita')
     <div class="position-relative px-3 px-lg-5 mt-5">
-        <nav aria-label="breadcrumb " data-bs-theme="dark">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item breadcrumb-nonactive ">Informasi Publik</li>
-                <li class="breadcrumb-item active " aria-current="page">Berita & Artikel</li>
-            </ol>
-        </nav>
+        <div class="text-center">
+            <p class="h1 text-white">Berita & Artikel</p>
+        </div>
         <div class="container-fluid d-flex justify-content-end">
             <form action="{{ route('berita.cari') }}" method="post">
-                @csrf 
+                @csrf
                 <div class="input-group">
                     <input class="form-control border-end-0 border-top-0 border-start-0 rounded-0  border-light text-white"
-                        type="text" placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header" style="color: white">
+                        type="text" placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header"
+                        style="color: white">
                     <span class="input-group-append">
                         <button
                             class="btn  border-top-0 border-bottom  border-light border-end-0 border-top-0 border-start-0  rounded-0"
@@ -31,50 +29,53 @@
         </div>
         <div class="container-fluid container-berita">
             <div class="row gy-5 ">
-                @foreach($berita as $x)
-                <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
-                    <div class="card bg-white card-berita mx-auto">
-                        <div class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                            <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}" style="width: 80%;">
+                @foreach ($berita as $x)
+                    <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
+                        <div class="card bg-white card-berita mx-auto">
+                            <div
+                                class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
+                                <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}"
+                                    style="width: 80%;">
+                            </div>
+                            <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
+                                <small>{{ $x->kategori }}</small>
+                                <p class="h5 fw-semibold my-2">
+                                    {{ Str::limit($x->judul, 40) }}
+                                </p>
+                                <p class="h6 fw-medium">{!! Str::limit($x->deskripsi, 100) !!}</p>
+                            </div>
+                            <a href="{{ route('detail.berita', ['id' => $x->id]) }}"
+                                class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover">
+                                <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
+                            </a>
+
                         </div>
-                        <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
-                            <small>{{ $x->kategori }}</small>
-                            <p class="h5 fw-semibold my-2">
-                                {{ Str::limit($x->judul, 40) }}
-                            </p>
-                            <p class="h6 fw-medium">{!! Str::limit($x->deskripsi, 100) !!}</p>
-                        </div>
-                        <a href="{{ route('detail.berita', ['id' => $x->id]) }}" class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover">
-                            <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
-                        </a>
-                        
                     </div>
-                </div>
-                    @endforeach
+                @endforeach
             </div>
             <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
                 <nav aria-label="Page navigation example">
                     <ul class="pagination pagination-secondary justify-content-end">
-                        @if($berita->previousPageUrl())
+                        @if ($berita->previousPageUrl())
                             <li class="page-item">
                                 <a class="page-link" href="{{ $berita->previousPageUrl() }}" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                         @endif
-            
+
                         <!-- Nomor Halaman -->
                         @php
                             $lastPage = min($berita->lastPage(), 3); // Tampilkan maksimal tiga halaman
                         @endphp
-            
-                        @for($i = 1; $i <= $lastPage; $i++)
+
+                        @for ($i = 1; $i <= $lastPage; $i++)
                             <li class="page-item {{ $berita->currentPage() == $i ? 'active' : '' }}">
                                 <a class="page-link" href="{{ $berita->url($i) }}">{{ $i }}</a>
                             </li>
                         @endfor
-            
-                        @if($berita->nextPageUrl())
+
+                        @if ($berita->nextPageUrl())
                             <li class="page-item">
                                 <a class="page-link" href="{{ $berita->nextPageUrl() }}" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
