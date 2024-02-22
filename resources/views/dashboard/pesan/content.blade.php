@@ -9,6 +9,16 @@
             </div>
         </div>
         <br>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        <br>
         <div class="container-fluid d-flex justify-content-end">
             <form action="{{ route('pesan.cariDashboard') }}" method="get" class="d-flex">
                 @csrf
@@ -40,6 +50,7 @@
                                     <th scope="col">Email</th>
                                     <th scope="col">Pesan</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">File</th>
                                     <th scope="col">Jawaban</th>
                                     <th scope="col">Alasan</th>
                                     <th scope="col">Aksi</th>
@@ -52,7 +63,7 @@
                                     <td> {{ $x->tiket }} </td>
                                     <td> {{ $x->nama_pemohon }}</td>
                                     <td> {{ $x->email }} </td>
-                                    <td> {{ $x->pesan }}</td>
+                                    <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;"> {{ $x->pesan }}</td>
                                     <td>
                                         @if($x->status == "Dijawab")
                                             <div class="badge badge-success">
@@ -68,16 +79,25 @@
                                             </div>
                                         @endif 
                                     </td>
-                                    <td> {!! $x->jawaban !!}</td>
-                                    <td> {!! $x->alasan !!}</td>
-                                    <td> @if($x->status == "Menunggu")
+                                    <td>
+                                        @if(empty($x->file))
+                                            <div class="badge badge-success">
+                                                Tidak ada file
+                                            </div>
+                                        @else<button type="button" class="btn btn-inverse-info btn-fw btn-sm"
+                                        data-toggle="modal" data-target="#detail-file_{{ $x->id}}">Detail
+                                        File</button>
+                                        @endif
+                                    </td>
+                                    <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;"> {!! $x->jawaban !!}</td>
+                                    <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;"> {!! $x->alasan !!}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-inverse-primary btn-fw btn-sm"
+                                            data-toggle="modal" data-target="#selesai_{{ $x->id }}">Detail</button> @if($x->status == "Menunggu")
                                         <button type="button" class="btn btn-inverse-success btn-fw btn-sm"
                                             data-toggle="modal" data-target="#jawab_{{ $x->id }}">Jawab Pesan</button>
                                         <button type="button" class="btn btn-inverse-danger btn-fw btn-sm"
                                             data-toggle="modal" data-target="#tolak_{{ $x->id }}">Tolak Jawab</button>
-                                        @else 
-                                            <button type="button" class="btn btn-inverse-primary btn-fw btn-sm"
-                                            data-toggle="modal" data-target="#selesai_{{ $x->id }}">Selesai</button>
                                         @endif
                                     </td>
                                 </tr>
@@ -91,7 +111,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="forms-sample" action="{{ route('pesan.jawab', $x->id) }}" method="post">
+                                                <form class="forms-sample" action="{{ route('pesan.jawab', $x->id) }}" method="post" enctype="multipart/form-data">
                                                     @csrf @method('PUT')
                                                     <div class="form-group row">
                                                         <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
@@ -109,7 +129,7 @@
                                                         <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
                                                         <div class="col-sm-9">
                                                             <div class="input-group ">
-                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
+                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file"
                                                                     class="form-control file-upload-info" placeholder="Upload Foto" >
                                                             </div>
                                                         </div>
@@ -123,7 +143,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal fade" id="tolak_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true">
+                                <div class="modal fade" id="tolak_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true" enctype="multipart/form-data">
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -133,7 +153,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form class="forms-sample" action="{{ route('pesan.tolak', $x->id) }}" method="post">
+                                                <form class="forms-sample" action="{{ route('pesan.tolak', $x->id) }}" method="post" enctype="multipart/form-data">
                                                     @csrf @method('PUT')
                                                     <div class="form-group row">
                                                         <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
@@ -151,7 +171,7 @@
                                                         <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
                                                         <div class="col-sm-9">
                                                             <div class="input-group ">
-                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
+                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file"
                                                                     class="form-control file-upload-info" placeholder="Upload Foto" >
                                                             </div>
                                                         </div>
@@ -166,51 +186,60 @@
                                                 <div class="modal fade" id="selesai_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true">
                                                     <div class="modal-dialog modal-xl">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLongTitle">Detail</h5>
+                                                            <div class="modal-header bg-primary text-white">
+                                                                <h5 class="modal-title">Detail Pertanyaan</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form class="forms-sample" action="{{ route('pesan.jawab', $x->id) }}" method="post">
-                                                                    @csrf @method('PUT')
-                                                                    <div class="form-group row">
-                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
-                                                                        <div class="col-sm-9">
-                                                                            <textarea  id="" cols="30" rows="10" class="form-control" readonly> {{ $x->pesan }}</textarea>
-                                                                        </div> 
+                                                                <div class="form-group row">
+                                                                    <label for="pertanyaan" class="col-sm-12 col-form-label font-weight-bold">Pertanyaan</label>
+                                                                    <div class="col-sm-12">
+                                                                        {!! $x->pesan !!}
                                                                     </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Jawaban Pesan</label>
-                                                                        <div class="col-sm-9">
-                                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="form-control">{{ $x->pesan }}</textarea>
-                                                                        </div> 
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="jawaban" class="col-sm-12 col-form-label font-weight-bold">Jawaban Pesan</label>
+                                                                    <div class="col-sm-12">
+                                                                        {!! $x->jawaban !!}
                                                                     </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Alasan Ditolak</label>
-                                                                        <div class="col-sm-9">
-                                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="form-control">{{ $x->tolak }}</textarea>
-                                                                        </div> 
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="alasan" class="col-sm-12 col-form-label font-weight-bold">Alasan Ditolak</label>
+                                                                    <div class="col-sm-12">
+                                                                        {!! $x->alasan !!}
                                                                     </div>
-                                                                    <div class="form-group row">
-                                                                        <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
-                                                                        <div class="col-sm-9">
-                                                                            <div class="input-group ">
-                                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
-                                                                                    class="form-control file-upload-info" placeholder="Upload Foto" >
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <button type="submit" class="btn btn-primary mr-2">Kirim</button>
-                                                                    <button class="btn btn-light" data-dismiss="modal" aria-label="Close">Batal</button>
-                                                                </form>
-                                            
-                                            </div>
+                                                                </div>
+                                                                <div class="text-center">
+                                                                    <button class="btn btn-danger" data-dismiss="modal" aria-label="Close">OK</button>
+                                                                </div>
+                                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+                                 {{-- file --}}
+                            <div class="modal fade" id="detail-file_{{ $x->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl ">
+                                    <div class="modal-content bg-white">
+                                        <div class="modal-header">
+                                            <p class="modal-title fs-5" id="exampleModalLabel">Lihat Dokumen {{ $x->tiket}}</p>                        
+                                        </div>
+                                        
+                                        <div class="modal-body ">
+                                            <div class="ratio" style="--bs-aspect-ratio: 50%;">
+                                                <embed width="100%" height="650"
+                                                src="{{ asset($x->file) }}"
+                                                type="application/pdf">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                aria-label="Close">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                                 @endforeach
                             </tbody>
                         </table>

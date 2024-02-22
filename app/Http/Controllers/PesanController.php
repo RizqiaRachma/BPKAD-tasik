@@ -50,14 +50,32 @@ class PesanController extends Controller
 
 
         return redirect(url()->previous() . '#footer')->with('success', new HtmlString('Pesan telah terkirim. <br> <h1>Tiket: ' . $kontak->tiket . '</h1> Silahkan cek jawaban di menu <a href="' . route('cek-tiket') . '">CEK TIKET</a>. Gunakan kode tiket di atas untuk melihat jawaban dari pesan Anda.'));
-
     }
 
 
     public function jawab(Request $request, $id)
     {
         $kontak = Pesan::find($id);
+        $request->validate([
+            'file' => 'nullable|mimes:pdf,docx,xlsx,png,jpeg,jpg|max:10240',
+        ], [
+            'file.mimes' => 'File harus berformat PDF, Docx, Xlsx, PNG, JPG, atau JPEG.',
+            'file.max' => 'File tidak boleh lebih dari 10 MB.',
+        ]);
+
         $jawaban         = $request->input('jawaban');
+
+        if ($request->hasFile('file')) {
+            // Ambil file yang diunggah
+            $file = $request->file('file');
+            // Simpan file di folder public/images dengan nama yang unik
+            $filePath = $file->storeAs('public/dok/pesan', $file->getClientOriginalName());
+
+            // Ubah path foto agar sesuai dengan path asset
+            $filePath = str_replace('public/', 'storage/', $filePath);
+            $kontak->file        = $filePath;
+        }
+
 
         // Ubah data lain yang ingin diubah
         $kontak->jawaban      = $jawaban;
@@ -71,7 +89,25 @@ class PesanController extends Controller
     public function tolak(Request $request, $id)
     {
         $kontak = Pesan::find($id);
+        $request->validate([
+            'file' => 'nullable|mimes:pdf,docx,xlsx,png,jpeg,jpg|max:10240',
+        ], [
+            'file.mimes' => 'File harus berformat PDF, Docx, Xlsx, PNG, JPG, atau JPEG.',
+            'file.max' => 'File tidak boleh lebih dari 10 MB.',
+        ]);
+
         $alasan         = $request->input('alasan');
+
+        if ($request->hasFile('file')) {
+            // Ambil file yang diunggah
+            $file = $request->file('file');
+            // Simpan file di folder public/images dengan nama yang unik
+            $filePath = $file->storeAs('public/dok/pesan', $file->getClientOriginalName());
+
+            // Ubah path foto agar sesuai dengan path asset
+            $filePath = str_replace('public/', 'storage/', $filePath);
+            $kontak->file        = $filePath;
+        }
 
         // Ubah data lain yang ingin diubah
         $kontak->jawaban      = "-";

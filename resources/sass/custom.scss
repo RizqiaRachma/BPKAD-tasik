@@ -620,5 +620,8 @@ table.rounded-corners {
   transform: scale(1.1) translateZ(10px);
 }
 
+.td.wrap-text {
+  word-wrap: break-word;
+}
 
 

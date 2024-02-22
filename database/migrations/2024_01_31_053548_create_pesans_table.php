@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('jawaban')->nullable();
             $table->string('alasan')->nullable();
+            $table->string('file')->nullable();
             $table->timestamps();
         });
     }
