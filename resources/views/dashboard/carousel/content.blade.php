@@ -1,4 +1,4 @@
-@section('foto_galeri')
+@section('carousel')
     {{-- tambah --}}
     <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="tambah" aria-hidden="true">
         <div class="modal-dialog">
@@ -13,6 +13,13 @@
                     <form class="forms-sample" action="{{ route('foto.simpan') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group row">
+                            <label for="judul" class="col-sm-3 col-form-label">Judul</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="judul" id="judul"
+                                    placeholder="Judul">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Foto</label>
                             <div class="col-sm-9">
@@ -48,7 +55,7 @@
         <div class=" stretch-card">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                    <h3>Foto Galeri</h3>
+                    <h3>Carousel</h3>
                     <button type="button" class="btn btn-inverse-success btn-fw" data-toggle="modal"
                         data-target="#tambah">Tambah
                         Foto</button>
@@ -63,6 +70,7 @@
                             <thead class="">
                                 <tr>
                                     <th scope="col">No</th>
+                                    <th scope="col">Judul</th>
                                     <th scope="col">Foto</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Aksi</th>
@@ -72,7 +80,10 @@
                                 @foreach ($foto as $key => $x)
                                     <tr>
                                         <td scope="row">{{ $key + 1 }}</td>
-                                        <td> <a href="{{ asset($x->foto) }}" class="image-spotlight">
+                                        <td>Judul</td>
+
+                                        <td>
+                                            <a href="{{ asset($x->foto) }}" class="image-spotlight">
                                                 <img src="{{ asset($x->foto) }}" class="img-fluid"
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
@@ -106,6 +117,14 @@
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
+                                                        <div class="form-group row">
+                                                            <label for="judul"
+                                                                class="col-sm-3 col-form-label">Judul</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="judul"
+                                                                    id="judul" placeholder="Judul">
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group row">
                                                             <label for="judul"
                                                                 class="col-sm-3 col-form-label">Foto</label>

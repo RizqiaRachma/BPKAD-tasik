@@ -1,5 +1,4 @@
 @section('pesan')
-    
     <div class="content-wrapper">
         <div class=" stretch-card">
             <div class="card">
@@ -23,8 +22,9 @@
             <form action="{{ route('pesan.cariDashboard') }}" method="get" class="d-flex">
                 @csrf
                 <div class="input-group">
-                    <input class="form-control rounded-0 border-dark text-dark" type="text" placeholder="Apa yang anda cari ?"
-                        name="judul" id="searchbar-header" style="color: rgb(22, 20, 20)">
+                    <input class="form-control rounded-0 border-dark text-dark" type="text"
+                        placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header"
+                        style="color: rgb(22, 20, 20)">
                     <div class="input-group-append">
                         <button class="btn btn-outline-dark rounded-0 border-dark" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="dark"
@@ -250,28 +250,31 @@
         <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-secondary justify-content-end">
-                    @if($pesan->previousPageUrl())
+                    @if ($pesan->previousPageUrl())
                         <li class="page-item">
                             <a class="page-link" href="{{ $pesan->previousPageUrl() }}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                     @endif
-        
+
                     <!-- Nomor Halaman -->
                     @php
                         $lastPage = min($pesan->lastPage(), 3); // Tampilkan maksimal tiga halaman
                     @endphp
-        
-                    @for($i = 1; $i <= $lastPage; $i++)
+
+                    @for ($i = 1; $i <= $lastPage; $i++)
                         <li class="page-item {{ $pesan->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $pesan->appends(['judul' => request('judul')])->url($i) }}">{{ $i }}</a>
+                            <a class="page-link"
+                                href="{{ $pesan->appends(['judul' => request('judul')])->url($i) }}">{{ $i }}</a>
                         </li>
                     @endfor
-        
-                    @if($pesan->nextPageUrl())
+
+                    @if ($pesan->nextPageUrl())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $pesan->appends(['judul' => request('judul')])->nextPageUrl() }}" aria-label="Next">
+                            <a class="page-link"
+                                href="{{ $pesan->appends(['judul' => request('judul')])->nextPageUrl() }}"
+                                aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
@@ -279,7 +282,7 @@
                 </ul>
             </nav>
         </div>
-        
-        
+
+
     </div>
 @endsection

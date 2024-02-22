@@ -54,6 +54,32 @@
 
     @vite(['resources/js/app.js'])
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var videoLinks = document.querySelectorAll('.video-spotlight');
+
+            videoLinks.forEach(function(link) {
+                link.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var videoId = this.getAttribute('href');
+                    Spotlight.show([{
+                        media: "node",
+                        autohide: "false",
+                        controls: "true",
+                        src: (function() {
+                            const iframe = document.createElement("iframe");
+                            iframe.src =
+                                videoId;
+
+                            iframe.style.width = '80%';
+                            iframe.style.height = '75%';
+                            return iframe;
+                        }())
+                    }]);
+                });
+            });
+        });
+    </script>
 
 
 </body>

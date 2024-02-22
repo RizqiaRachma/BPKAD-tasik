@@ -61,7 +61,7 @@
                                         data-bs-target="#detail-file_{{ $x->id }}"
                                         class="breadcrumb-item link-secondary  text-decoration-none"><i
                                             class="bi bi-eye me-1"></i> Preview</a>
-
+                                    <p class="breadcrumb-item text-secondary ">Kategori</p>
                                 </div>
                             </div>
 

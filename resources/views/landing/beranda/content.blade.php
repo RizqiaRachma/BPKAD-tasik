@@ -1,9 +1,27 @@
 @section('beranda')
+    {{-- modal --}}
+    <div class="modal fade " id="pengumuman" tabindex="-1" aria-labelledby="pengumuman" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-white">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
+                        alt="" class="img-fluid" style="height: 100%; width:100%">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    {{--  --}}
     <div class="image-container" id="beranda">
         <div id="berita_terbaru" class="carousel slide custom-carousel carousel-fade " data-bs-ride="caraousel">
             <div class="carousel-indicators ">
-                <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="0" class="active" aria-current="true"
-                    aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
@@ -98,7 +116,8 @@
             @foreach ($berita->take(4) as $x)
                 <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
                     <div class="card bg-white card-berita mx-auto">
-                        <div class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
+                        <div
+                            class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
                             <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}"
                                 style="width: 80%; object-fit:cover">
                         </div>
