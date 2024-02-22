@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false" aria-controls="galeri">
+                <a class="nav-link" data-toggle="collapse" href="#berita" aria-expanded="false" aria-controls="berita">
                     <i class="ti-notepad menu-icon"></i>
                     <span class="menu-title">Berita</span>
                     <i class="menu-arrow"></i>
@@ -62,16 +62,17 @@
                     </ul>
                 </div>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#regulasi" aria-expanded="false" aria-controls="regulasi">
                     <i class="ti-stamp menu-icon"></i>
                     <span class="menu-title">Produk Hukum</span>
                     <i class="menu-arrow"></i>
                 </a>
-                <div class="collapse" id="regulasi">
+                <div id="regulasi" class="collapse">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/regulasi/kategori">Kategori </a>
+                            <a class="nav-link" href="/dashboard/regulasi/kategori">Kategori a</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard/regulasi">List </a>
@@ -84,6 +85,18 @@
                 <a class="nav-link" href="/dashboard/pesan">
                     <i class="ti-envelope menu-icon"></i>
                     <span class="menu-title">Pesan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/carousel">
+                    <i class="ti-layers-alt menu-icon"></i>
+                    <span class="menu-title">Carousel Beranda</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard/pengumuman">
+                    <i class="ti-info-alt menu-icon"></i>
+                    <span class="menu-title">Pengumuman</span>
                 </a>
             </li>
             <li class="nav-item">

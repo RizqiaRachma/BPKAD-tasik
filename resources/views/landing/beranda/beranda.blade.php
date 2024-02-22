@@ -16,11 +16,17 @@
     @include('components.footer.footer')
 
     @yield('header')
-    <main class="z-n1" style="min-height:50vh">
+    <main class="z-n1" style="min-height:80vh">
         @yield('beranda')
     </main>
     @yield('footer')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <script>
+        $(document).ready(function() {
+            $('#pengumuman').modal('show');
+        });
+    </script>
 
 </body>
 

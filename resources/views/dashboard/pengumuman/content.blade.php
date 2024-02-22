@@ -1,4 +1,4 @@
-@section('foto_galeri')
+@section('pengumuman')
     {{-- tambah --}}
     <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="tambah" aria-hidden="true">
         <div class="modal-dialog">
@@ -13,18 +13,18 @@
                     <form class="forms-sample" action="{{ route('foto.simpan') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group row">
-                            <label for="judul" class="col-sm-3 col-form-label">Foto</label>
+                            <label for="file" class="col-sm-3 col-form-label">Foto</label>
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" name="foto" id="file" placeholder="File"
                                     accept=".jpeg, .png, .png ">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="judul" class="col-sm-3 col-form-label">Keterangan</label>
+                            <label for="judul" class="col-sm-3 col-form-label">Teks</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="ket" id="keterangan"
-                                    placeholder="Keterangan">
+                                <input type="text" class="form-control" name="teks" id="teks" placeholder="Teks">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -48,7 +48,7 @@
         <div class=" stretch-card">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                    <h3>Foto Galeri</h3>
+                    <h3>Pengumuman</h3>
                     <button type="button" class="btn btn-inverse-success btn-fw" data-toggle="modal"
                         data-target="#tambah">Tambah
                         Foto</button>
@@ -64,10 +64,12 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Foto</th>
+                                    <th scope="col">teks</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 @foreach ($foto as $key => $x)
                                     <tr>
@@ -77,6 +79,8 @@
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
                                         </td>
+                                        <td>Judul</td>
+
                                         <td>{{ $x->ket }}</td>
                                         <td>
                                             <button type="button" class="btn btn-inverse-warning btn-fw btn-sm"
@@ -106,6 +110,14 @@
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
+                                                        <div class="form-group row">
+                                                            <label for="judul"
+                                                                class="col-sm-3 col-form-label">Judul</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="judul"
+                                                                    id="judul" placeholder="Judul">
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group row">
                                                             <label for="judul"
                                                                 class="col-sm-3 col-form-label">Foto</label>

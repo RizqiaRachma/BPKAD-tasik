@@ -19,7 +19,7 @@
 </head>
 
 <body class="sidebar-light">
-    @include('dashboard.galeri.foto.content')
+    @include('dashboard.pengumuman.content')
     @include('components.header.dashboard')
     @include('components.footer.dashboard')
     @include('components.sidebar.dashboard')
@@ -29,7 +29,7 @@
         <div class="container-fluid page-body-wrapper">
             @yield('sidebar')
             <div class="main-panel">
-                @yield('foto_galeri')
+                @yield('pengumuman')
 
                 @yield('footer')
             </div>
@@ -50,7 +50,6 @@
     <script src="{{ asset('template/js/Chart.roundedBarCharts.js') }}"></script>
 
     @vite(['resources/js/app.js'])
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var imageLinks = document.querySelectorAll('.image-spotlight');
@@ -85,6 +84,7 @@
             });
         });
     </script>
+
 
 </body>
 

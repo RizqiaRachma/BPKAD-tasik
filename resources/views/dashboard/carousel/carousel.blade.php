@@ -19,7 +19,7 @@
 </head>
 
 <body class="sidebar-light">
-    @include('dashboard.galeri.foto.content')
+    @include('dashboard.carousel.content')
     @include('components.header.dashboard')
     @include('components.footer.dashboard')
     @include('components.sidebar.dashboard')
@@ -29,7 +29,7 @@
         <div class="container-fluid page-body-wrapper">
             @yield('sidebar')
             <div class="main-panel">
-                @yield('foto_galeri')
+                @yield('carousel')
 
                 @yield('footer')
             </div>
