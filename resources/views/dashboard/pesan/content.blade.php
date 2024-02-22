@@ -66,24 +66,23 @@
                                             <div class="badge badge-secondary">
                                                 Menunggu
                                             </div>
-                                        @endif
+                                        @endif 
                                     </td>
-                                    <td> {{ $x->jawaban }}</td>
-                                    <td> {{ $x->alasan }}</td>
+                                    <td> {!! $x->jawaban !!}</td>
+                                    <td> {!! $x->alasan !!}</td>
                                     <td> @if($x->status == "Menunggu")
                                         <button type="button" class="btn btn-inverse-success btn-fw btn-sm"
                                             data-toggle="modal" data-target="#jawab_{{ $x->id }}">Jawab Pesan</button>
                                         <button type="button" class="btn btn-inverse-danger btn-fw btn-sm"
                                             data-toggle="modal" data-target="#tolak_{{ $x->id }}">Tolak Jawab</button>
                                         @else 
-                                        <div class="badge badge-primary">
-                                            Selesai
-                                        </div>
+                                            <button type="button" class="btn btn-inverse-primary btn-fw btn-sm"
+                                            data-toggle="modal" data-target="#selesai_{{ $x->id }}">Selesai</button>
                                         @endif
                                     </td>
                                 </tr>
                                 <div class="modal fade" id="jawab_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Jawab Pesan</h5>
@@ -95,9 +94,24 @@
                                                 <form class="forms-sample" action="{{ route('pesan.jawab', $x->id) }}" method="post">
                                                     @csrf @method('PUT')
                                                     <div class="form-group row">
+                                                        <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea  id="" cols="30" rows="10" class="form-control" readonly> {{ $x->pesan }}</textarea>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label for="nama_file" class="col-sm-3 col-form-label">Jawaban Pesan</label>
                                                         <div class="col-sm-9">
-                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="jawaban"></textarea>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group ">
+                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
+                                                                    class="form-control file-upload-info" placeholder="Upload Foto" >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary mr-2">Kirim</button>
@@ -110,7 +124,7 @@
                                     </div>
                                 </div>
                                 <div class="modal fade" id="tolak_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true">
-                                    <div class="modal-dialog">
+                                    <div class="modal-dialog modal-xl">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Jawab Pesan</h5>
@@ -122,16 +136,76 @@
                                                 <form class="forms-sample" action="{{ route('pesan.tolak', $x->id) }}" method="post">
                                                     @csrf @method('PUT')
                                                     <div class="form-group row">
+                                                        <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
+                                                        <div class="col-sm-9">
+                                                            <textarea  id="" cols="30" rows="10" class="form-control" readonly> {{ $x->pesan }}</textarea>
+                                                        </div> 
+                                                    </div>
+                                                    <div class="form-group row">
                                                         <label for="nama_file" class="col-sm-3 col-form-label">Alasan di tolak</label>
                                                         <div class="col-sm-9">
-                                                            <textarea name="alasan" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                            <textarea name="alasan" id="" cols="30" rows="10" class="jawaban"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
+                                                        <div class="col-sm-9">
+                                                            <div class="input-group ">
+                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
+                                                                    class="form-control file-upload-info" placeholder="Upload Foto" >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <button type="submit" class="btn btn-primary mr-2">Kirim</button>
                                                     <button class="btn btn-light" data-dismiss="modal" aria-label="Close">Batal</button>
                                                 </form>
-                            
-                            
+                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal fade" id="selesai_{{ $x->id }}" tabindex="-1" role="dialog" aria-labelledby="jawab" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">Detail</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form class="forms-sample" action="{{ route('pesan.jawab', $x->id) }}" method="post">
+                                                                    @csrf @method('PUT')
+                                                                    <div class="form-group row">
+                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Pertanyaan</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea  id="" cols="30" rows="10" class="form-control" readonly> {{ $x->pesan }}</textarea>
+                                                                        </div> 
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Jawaban Pesan</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="form-control">{{ $x->pesan }}</textarea>
+                                                                        </div> 
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="nama_file" class="col-sm-3 col-form-label">Alasan Ditolak</label>
+                                                                        <div class="col-sm-9">
+                                                                            <textarea name="jawaban" id="" cols="30" rows="10" class="form-control">{{ $x->tolak }}</textarea>
+                                                                        </div> 
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label for="foto_utama" class="col-sm-3 col-form-label">File</label>
+                                                                        <div class="col-sm-9">
+                                                                            <div class="input-group ">
+                                                                                <input type="file" accept=".pdf, .xlsx, .docx, .jpg, .png, .jpeg" name="file_pesan"
+                                                                                    class="form-control file-upload-info" placeholder="Upload Foto" >
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="submit" class="btn btn-primary mr-2">Kirim</button>
+                                                                    <button class="btn btn-light" data-dismiss="modal" aria-label="Close">Batal</button>
+                                                                </form>
+                                            
                                             </div>
                                         </div>
                                     </div>

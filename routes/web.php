@@ -244,9 +244,9 @@ Route::middleware(['auth'])->group(function () {
         $kategori = Kategori_informasi::paginate(5);
         return view('dashboard.informasi_publik.kategori.kategori_informasi', ['kategori' => $kategori]);
     });
-    Route::post('/kategori-informasi-simpan', [KategoriInformasiController::class, 'tambah'])->name('kategori_informasi.simpan');
-    Route::put('/kategori-informasi-update/{id}', [KategoriInformasiController::class, 'update'])->name('kategori_informasi.update');
-    Route::delete('/kategori-informasi-delete/{id}', [KategoriInformasiController::class, 'destroy'])->name('kategori_informasi.delete');
+    Route::post('/kategori_informasi-simpan', [KategoriInformasiController::class, 'tambah'])->name('kategori_informasi.simpan');
+    Route::put('/kategori_informasi-update/{id}', [KategoriInformasiController::class, 'update'])->name('kategori_informasi.update');
+    Route::delete('/kategori_informasi-delete/{id}', [KategoriInformasiController::class, 'destroy'])->name('kategori_informasi.delete');
 
     Route::get('/dashboard/informasi_publik', function () {
         $informasi = Informasi::paginate(5);
