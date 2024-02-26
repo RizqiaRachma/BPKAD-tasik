@@ -81,11 +81,15 @@ Route::get('/informasi_publik/renstra', function () {
 })->name('renstra');
 
 //revisi
+// Route::get('/informasi_publik', function () {
+//     $berita = Berita::paginate(12);
+//     return view('landing.informasi_publik.informasi_publik', ['berita' => $berita]);
+// })->name('informasi_publik');
 Route::get('/informasi_publik', function () {
-    $berita = Berita::paginate(12);
-    return view('landing.informasi_publik.informasi_publik', ['berita' => $berita]);
-})->name('informasi_publik');
-
+    $kategori = Kategori_berita::all();
+    $berita = Berita::paginate(4);
+    return view('landing.informasi_publik.informasi_publik', ['kategori' => $kategori, 'berita' => $berita]);
+});
 //
 Route::get('/informasi_publik/renja', function () {
     $informasi = Informasi::where('tipe', 'Renja')->paginate(5);
@@ -251,10 +255,15 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/kategori-informasi-update/{id}', [KategoriInformasiController::class, 'update'])->name('kategori_informasi.update');
     Route::delete('/kategori-informasi-delete/{id}', [KategoriInformasiController::class, 'destroy'])->name('kategori_informasi.delete');
 
+
     Route::get('/dashboard/informasi_publik', function () {
         $informasi = Informasi::paginate(5);
         return view('dashboard.informasi_publik.informasi_publik', ['informasi' => $informasi]);
     })->name('informasi-publik');
+
+
+
+
     Route::post('/informasi-simpan', [InformasiController::class, 'tambah'])->name('informasi.simpan');
     Route::put('/informasi-update/{id}', [InformasiController::class, 'update'])->name('informasi.update');
     Route::delete('/informasi-delete/{id}', [InformasiController::class, 'destroy'])->name('informasi.delete');

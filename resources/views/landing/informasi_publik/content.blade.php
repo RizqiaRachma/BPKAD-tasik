@@ -5,86 +5,206 @@
         </div>
         <div class="container-fluid d-flex justify-content-end mb-5">
 
+            <div class="row">
+                <div class="col-12">
+                    <div class="row mt-3">
+                        @foreach ($berita as $x)
+                            <div class="col-md-6 col-lg-4 col-xxl-3 my-3">
+                                <div class="card bg-white" style="min-height:47rem">
+                                    <div class="card-body row">
+                                        <div class="col-12">
+                                            <img src="{{ asset($x->foto) }}" alt="" class=""
+                                                style="width:100%; border-radius:10px;object-fit:contain; height:20rem;
+                                                /* background-color:rgb(228, 228, 228) */
+                                                ">
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="fs-25">
+                                                <b> {{ $x->judul }} </b>
+                                            </p>
+                                            <p class="text-truncate">{{ $x->kategori }}</p>
+                                            <p class="text-truncate">Create : {{ $x->created_at }}</p>
+                                            <p class="text-truncate">Update : {{ $x->updated_at }}</p>
+                                            <p class="text-truncate">{!! Str::limit($x->deskripsi, 100) !!}</p>
+                                            <div class="mt-5  w-100">
+                                                <button type="button" class=" btn btn-outline-info btn-fw btn-sm"
+                                                    data-toggle="modal" data-target="#detail_{{ $x->id }}">Kategori
+                                                    berita
+                                                </button>
 
-            <form action="{{ route('berita.cari') }}" method="post">
-                @csrf
-                <div class="input-group">
-                    <input class="form-control border-end-0 border-top-0 border-start-0 rounded-0  border-light text-white"
-                        type="text" placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header"
-                        style="color: white">
-                    <span class="input-group-append">
-                        <button
-                            class="btn  border-top-0 border-bottom  border-light border-end-0 border-top-0 border-start-0  rounded-0"
-                            type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                            </svg>
-                        </button>
-                    </span>
-                </div>
+                                                <button type="button" class=" btn btn-outline-warning btn-fw btn-sm"
+                                                    data-toggle="modal" data-target="#edit_{{ $x->id }}">Kategori
+                                                    berita
+                                                </button>
 
-            </form>
-        </div>
-        <div class="container-fluid container-berita">
-            <div class="row gy-5 ">
-                @foreach ($berita as $x)
-                    <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
-                        <div class="card bg-white card-berita mx-auto">
-                            <div
-                                class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                                <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}"
-                                    style="width: 80%;">
+                                                <button type="button" class=" btn btn-outline-danger btn-fw btn-sm"
+                                                    data-toggle="modal" data-target="#hapus_{{ $x->id }}">Kategori
+                                                    berita
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
-                                <small class=""><a class="link-dark" href="#">{{ $x->kategori }}</a></small>
-                                <p class="h5 fw-semibold my-2">
-                                    {{ Str::limit($x->judul, 40) }}
-                                </p>
-                                <p class="h6 fw-medium">{!! Str::limit($x->deskripsi, 100) !!}</p>
-                            </div>
-                            <a href="{{ route('detail.berita', ['id' => $x->id]) }}"
-                                class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover">
-                                <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
-                            </a>
 
-                        </div>
+
+                            {{-- detail --}}
+                            <div class="modal fade" id="detail_{{ $x->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{ $x->judul }}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {!! $x->deskripsi !!}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- edit --}}
+                            <div class="modal fade" id="edit_{{ $x->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="tambah" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Ubah Berita</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="forms-sample" action="{{ route('berita.update', $x->id) }}"
+                                                method="POST" enctype="multipart/form-data"> @csrf @method('PUT')
+                                                <div class="form-group row">
+                                                    <label for="judul" class="col-sm-3 col-form-label">Judul</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="judul"
+                                                            id="judul" value="{{ $x->judul }}"
+                                                            placeholder="Judul Berita">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="kategori" class="col-sm-3 col-form-label">Kategori</label>
+                                                    <div class="col-sm-9">
+                                                        <select class="form-control" id="kategori" name="kategori"
+                                                            required>
+                                                            @foreach ($kategori as $k)
+                                                                <option value="{{ $k->kategori }}"
+                                                                    @if ($k->kategori == $x->kategori) selected @endif>
+                                                                    {{ $k->kategori }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="deskripsi" class="col-sm-3 col-form-label">Deskripsi</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control" name="deskripsi" value="{{ $x->deskripsi }}" rows="5" placeholder="Deskripsi">{{ $x->deskripsi }}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="foto_utama" class="col-sm-3 col-form-label">Foto</label>
+                                                    <div class="col-sm-9">
+                                                        <div class="input-group ">
+                                                            <input type="file" accept=".jpg, .png, .jpeg"
+                                                                name="foto" class="form-control file-upload-info"
+                                                                placeholder="Upload Foto">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                                <button type="submit" class="btn btn-primary mr-2">Simpan</button>
+                                                <button class="btn btn-light" data-dismiss="modal"
+                                                    aria-label="Close">Batal</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- hapus --}}
+                            <div class="modal fade" id="hapus_{{ $x->id }}" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Hapus Berita</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Yakin Hapus Berita ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Batal</button>
+                                            <form action="{{ route('berita.delete', $x->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+                <div class="col-12">
+                    <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination pagination-secondary justify-content-end">
+                                @if ($berita->previousPageUrl())
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $berita->previousPageUrl() }}"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+                                @endif
+
+                                <!-- Nomor Halaman -->
+                                @php
+                                    $lastPage = min($berita->lastPage(), 3); // Tampilkan maksimal tiga halaman
+                                @endphp
+
+                                @for ($i = 1; $i <= $lastPage; $i++)
+                                    <li class="page-item {{ $berita->currentPage() == $i ? 'active' : '' }}">
+                                        <a class="page-link"
+                                            href="{{ $berita->appends(['judul' => request('judul')])->url($i) }}">{{ $i }}</a>
+                                    </li>
+                                @endfor
+
+                                @if ($berita->nextPageUrl())
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                            href="{{ $berita->appends(['judul' => request('judul')])->nextPageUrl() }}"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
-            <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-secondary justify-content-end">
-                        @if ($berita->previousPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $berita->previousPageUrl() }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        @endif
 
-                        <!-- Nomor Halaman -->
-                        @php
-                            $lastPage = min($berita->lastPage(), 3); // Tampilkan maksimal tiga halaman
-                        @endphp
 
-                        @for ($i = 1; $i <= $lastPage; $i++)
-                            <li class="page-item {{ $berita->currentPage() == $i ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $berita->url($i) }}">{{ $i }}</a>
-                            </li>
-                        @endfor
-
-                        @if ($berita->nextPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $berita->nextPageUrl() }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
-            </div>
         </div>
-    </div>
-@endsection
+    @endsection
