@@ -53,7 +53,7 @@
                 <div class="collapse" id="informasi">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/informasi_publik/kategori">Kategori </a>
+                            <a class="nav-link" href="/dashboard/informasi_publik/kategori_informasi">Kategori </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard/informasi_publik">List </a>
@@ -72,7 +72,7 @@
                 <div id="regulasi" class="collapse">
                     <ul class="nav flex-column sub-menu">
                         <li class="nav-item">
-                            <a class="nav-link" href="/dashboard/regulasi/kategori">Kategori a</a>
+                            <a class="nav-link" href="/dashboard/regulasi/kategori_regulasi">Kategori</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/dashboard/regulasi">List </a>

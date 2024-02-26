@@ -261,7 +261,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/informasi-cariDashboard', [InformasiController::class, 'cariDashboard'])->name('informasi.cariDashboard');
 
 
-    Route::get('/dashboard/regulasi/kategori', function () {
+    Route::get('/dashboard/regulasi/kategori_regulasi', function () {
         $kategori = Kategori_regulasi::paginate(5);
         return view('dashboard.regulasi.kategori.kategori_regulasi', ['kategori' => $kategori]);
     });
