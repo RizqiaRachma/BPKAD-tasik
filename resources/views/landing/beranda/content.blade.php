@@ -7,8 +7,45 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
-                        alt="" class="img-fluid" style="height: 100%; width:100%">
+                    {{-- <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
+                        alt="" class="img-fluid" style="height: 100%; width:100%"> --}}
+
+                    <div id="berita_terbaru" class="carousel slide custom-carousel carousel-fade " data-bs-ride="carousel">
+
+                        {{-- bubble button --}}
+
+                        {{-- <div class="carousel-indicators ">
+                            <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="0" class="active"
+                                aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+
+                        </div> --}}
+                        <div class="carousel-inner h-100" data-bs-interval="100">
+                            <div class="carousel-item active">
+                                <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
+                                    class="d-block w-100 custom-carousel" alt="...">
+
+                            </div>
+
+                            <div class="carousel-item">
+                                <img src="https://images.pexels.com/photos/18578343/pexels-photo-18578343/free-photo-of-a-woman-in-a-white-dress-and-hat-walking-through-a-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                    class="d-block w-100 custom-carousel" alt="...">
+
+                            </div>
+                        </div>
+                        {{-- button kiri kanan --}}
+                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#berita_terbaru"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#berita_terbaru"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button> --}}
+                    </div>
                 </div>
 
             </div>
@@ -93,8 +130,8 @@
                 </a>
                 <a href="https://www.lapor.go.id/tentang" class="col-4 col-lg-2   hovered_card align-self-center"
                     aria-label="sp4n">
-                    <img src="https://www.lapor.go.id/themes/lapor/assets/images/logo.png" class="img-fluid" alt=""
-                        style="width: 10rem">
+                    <img src="https://www.lapor.go.id/themes/lapor/assets/images/logo.png" class="img-fluid"
+                        alt="" style="width: 10rem">
                 </a>
                 <a href="https://portal.tasikmalayakota.go.id/" class="col-4 col-lg-2  hovered_card align-self-center"
                     aria-label="portal kota tasikmalaya">
@@ -118,7 +155,8 @@
                     <div class="card bg-white card-berita mx-auto">
                         <div
                             class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                            <img id="hat" src="{{ $x->thumbnail ? asset($x->thumbnail) : asset($x->foto) }}" alt="{{ $x->judul }}" style="width: 80%; object-fit:cover">
+                            <img id="hat" src="{{ $x->thumbnail ? asset($x->thumbnail) : asset($x->foto) }}"
+                                alt="{{ $x->judul }}" style="width: 80%; object-fit:cover">
                         </div>
                         <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
                             <small class=""><a class="link-dark" href="#">{{ $x->kategori }}</a></small>
@@ -178,5 +216,4 @@
                         <i class="bi bi-chevron-right"></i></span></a>
             </div>
         </div>
-
     @endsection

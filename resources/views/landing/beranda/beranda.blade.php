@@ -26,6 +26,10 @@
         $(document).ready(function() {
             $('#pengumuman').modal('show');
         });
+        $('#pengumuman').carousel({
+            interval: 3000,
+            cycle: true
+        });
     </script>
 
 </body>
