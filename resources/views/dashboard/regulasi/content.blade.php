@@ -28,14 +28,11 @@
                         <div class="form-group row">
                             <label for="tipe" class="col-sm-3 col-form-label">Tipe</label>
                             <div class="col-sm-9">
-                                <select class="form-control form-control" name="tipe" id="tipe">
-                                    <option selected disabled hidden>Pilih Tipe</option>
-                                    <option value="Undang-undang">Undang-Undang</option>
-                                    <option value="Peraturan Pemerintah">Peraturan Pemerintah</option>
-                                    <option value="Peraturan Menteri">Peraturan Menteri</option>
-                                    <option value="Peraturan Gubernur">Peraturan Gubernur</option>
-                                    <option value="Peraturan Daerah">Peraturan Daerah</option>
-                                    <option value="Peraturan Walikota">Peraturan Walikota</option>
+                                <select class="form-control form-control" id="kategori" name="tipe" required>
+                                    <option selected hidden>Pilih</option>
+                                    @foreach($kategori as $x)
+                                    <option value="{{ $x->kategori }}">{{ $x->kategori }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -159,12 +156,13 @@
                                                     <div class="form-group row">
                                                         <label for="tipe" class="col-sm-3 col-form-label">Tipe</label>
                                                         <div class="col-sm-9">
-                                                            
-                                                            <select class="form-control form-control" name="tipe" id="tipe_ubah">
-                                                            @foreach(['Undang-undang', 'Peraturan Pemerintah', 'Peraturan Menteri', 'Peraturan Gubernur', 'Peraturan Daerah', 'Peraturan Walikota'] as $option)
-                                                                <option value="{{ $option }}" @if($x->tipe == $option) selected @endif>{{ strtoupper($option) }}</option>
+                                                            <select class="form-control" id="kategori" name="tipe" required>
+                                                                @foreach($kategori as $k)
+                                                                    <option value="{{ $k->kategori }}" @if($k->kategori == $x->tipe) selected @endif>
+                                                                        {{ $k->kategori }}
+                                                                    </option>
                                                                 @endforeach
-                                                            </select>
+                                                            </select> 
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">

@@ -40,11 +40,20 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto</label>
+                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto berita</label>
                             <div class="col-sm-9">
                                 <div class="input-group ">
                                     <input type="file" accept=".jpg, .png, .jpeg" class="form-control file-upload-info"
                                       name="foto"  placeholder="Upload Foto">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="foto_utama" class="col-sm-3 col-form-label">Thumbnail (1080x1080)</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <input type="file" accept=".jpg, .png, .jpeg" class="form-control file-upload-info"
+                                      name="thumbnail"  placeholder="Upload Foto">
                                 </div>
                             </div>
                         </div>
@@ -108,7 +117,12 @@
                 <div class="card card-black">
                     <div class="card-body row">
                         <div class="col-3 d-flex align-items-center">
-                            <img src="{{ asset($x->foto) }}" alt="" style="width:100%; border-radius:10px">
+                            @if ($x->thumbnail != null)
+                                <img src="{{ asset($x->thumbnail) }}" alt="" style="width:100%; border-radius:10px">
+                            @else
+                                <img src="{{ asset($x->foto) }}" alt="" style="width:100%; border-radius:10px">
+                            @endif
+
                         </div>
                         <div class="col-9">
                             <p class="fs-25">
@@ -148,6 +162,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <img src="{{ asset($x->foto) }}" alt="" style="width:100%; border-radius:10px">
                     {!! $x->deskripsi !!}
                 </div>
                 <div class="modal-footer">
@@ -201,7 +216,15 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group row">
+                            <label for="foto_utama" class="col-sm-3 col-form-label">Thumbnail (1080x1080)</label>
+                            <div class="col-sm-9">
+                                <div class="input-group ">
+                                    <input type="file" accept=".jpg, .png, .jpeg" name="thumbnail"
+                                        class="form-control file-upload-info" placeholder="Upload Foto" >
+                                </div>
+                            </div>
+                        </div>
 
 
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>

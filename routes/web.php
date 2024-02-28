@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FotoController;
 use App\Http\Controllers\InformasiController;
@@ -8,15 +9,18 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KategoriInformasiController;
 use App\Http\Controllers\KategoriRegulasiController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PengumumanController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\RegulasiController;
 use App\Http\Controllers\VideoController;
 use App\Models\Berita;
+use App\Models\Carousel;
 use App\Models\Foto;
 use App\Models\Informasi;
 use App\Models\Kategori_berita;
 use App\Models\Kategori_informasi;
 use App\Models\Kategori_regulasi;
+use App\Models\Pengumuman;
 use App\Models\Pesan;
 use App\Models\Regulasi;
 use App\Models\Video;
@@ -258,7 +262,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard/informasi_publik', function () {
         $informasi = Informasi::paginate(5);
-        return view('dashboard.informasi_publik.informasi_publik', ['informasi' => $informasi]);
+        $kategori = Kategori_informasi::all();
+        return view('dashboard.informasi_publik.informasi_publik', ['informasi' => $informasi, 'kategori' => $kategori]);
     })->name('informasi-publik');
 
 
@@ -280,7 +285,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/dashboard/regulasi', function () {
         $regulasi = Regulasi::paginate(5);
-        return view('dashboard.regulasi.regulasi', ['regulasi' => $regulasi]);
+        $kategori = Kategori_regulasi::all();
+        return view('dashboard.regulasi.regulasi', ['regulasi' => $regulasi, 'kategori' => $kategori]);
     })->name('regulasi');
     Route::post('/regulasi-simpan', [RegulasiController::class, 'tambah'])->name('regulasi.simpan');
     Route::put('/regulasi-update/{id}', [RegulasiController::class, 'update'])->name('regulasi.update');
@@ -292,14 +298,20 @@ Route::middleware(['auth'])->group(function () {
     })->name('dashboard-pengaturan');
     //
     Route::get('/dashboard/carousel', function () {
-        $foto = Foto::paginate(5);
-        return view('dashboard.carousel.carousel', ['foto' => $foto]);
+        $carousel = Carousel::paginate(5);
+        return view('dashboard.carousel.carousel', ['carousel' => $carousel]);
     })->name('dashboard-carousel');
-    Route::get('/dashboard/pengumuman', function () {
-        $foto = Foto::paginate(5);
-        return view('dashboard.pengumuman.pengumuman', ['foto' => $foto]);
-    })->name('dashboard-pengumuman');
+    Route::post('/carousel-simpan', [CarouselController::class, 'tambah'])->name('carousel.simpan');
+    Route::put('/carousel-update/{id}', [CarouselController::class, 'update'])->name('carousel.update');
+    Route::delete('/carousel-delete/{id}', [CarouselController::class, 'destroy'])->name('carousel.delete');
 
+    Route::get('/dashboard/pengumuman', function () {
+        $pengumuman = Pengumuman::paginate(5);
+        return view('dashboard.pengumuman.pengumuman', ['pengumuman' => $pengumuman]);
+    })->name('dashboard-pengumuman');
+    Route::post('/pengumuman-simpan', [PengumumanController::class, 'tambah'])->name('pengumuman.simpan');
+    Route::put('/pengumuman-update/{id}', [PengumumanController::class, 'update'])->name('pengumuman.update');
+    Route::delete('/pengumuman-delete/{id}', [PengumumanController::class, 'destroy'])->name('pengumuman.delete');
     //
     Route::get('/dashboard/pesan', function () {
         $pesan = Pesan::paginate(5);

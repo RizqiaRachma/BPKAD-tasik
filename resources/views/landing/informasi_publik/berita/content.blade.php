@@ -34,7 +34,7 @@
                         <div class="card bg-white card-berita mx-auto">
                             <div
                                 class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                                <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}"
+                                <img id="hat" src="{{ asset($x->thumbnail) }}" alt="{{ $x->judul }}"
                                     style="width: 80%;">
                             </div>
                             <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">

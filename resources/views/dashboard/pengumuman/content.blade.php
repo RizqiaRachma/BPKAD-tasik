@@ -1,16 +1,16 @@
 @section('pengumuman')
     {{-- tambah --}}
     <div class="modal fade" id="tambah" tabindex="-1" role="dialog" aria-labelledby="tambah" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Foto</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pengumuman</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" action="{{ route('foto.simpan') }}" method="post"
+                    <form class="forms-sample" action="{{ route('pengumuman.simpan') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
 
@@ -24,7 +24,13 @@
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Teks</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="teks" id="teks" placeholder="Teks">
+                                    <textarea class="form-control" name="pengumuman" placeholder="silahkan masukan isi pengumuman"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="judul" class="col-sm-3 col-form-label">Keterangan</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="ket" id="teks" placeholder="Keterangan">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -50,8 +56,7 @@
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <h3>Pengumuman</h3>
                     <button type="button" class="btn btn-inverse-success btn-fw" data-toggle="modal"
-                        data-target="#tambah">Tambah
-                        Foto</button>
+                        data-target="#tambah">Tambah Pengumuman</button>
                 </div>
             </div>
         </div>
@@ -71,7 +76,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($foto as $key => $x)
+                                @foreach ($pengumuman as $key => $x)
                                     <tr>
                                         <td scope="row">{{ $key + 1 }}</td>
                                         <td> <a href="{{ asset($x->foto) }}" class="image-spotlight">
@@ -79,7 +84,7 @@
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
                                         </td>
-                                        <td>Judul</td>
+                                        <td>{!! $x->pengumuman !!}</td>
 
                                         <td>{{ $x->ket }}</td>
                                         <td>
@@ -96,28 +101,20 @@
                                     {{-- edit --}}
                                     <div class="modal fade" id="edit_{{ $x->id }}" tabindex="-1" role="dialog"
                                         aria-labelledby="tambah" aria-hidden="true">
-                                        <div class="modal-dialog">
+                                        <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Foto</h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Pengumuman</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="forms-sample" action="{{ route('foto.update', $x->id) }}"
+                                                    <form class="forms-sample" action="{{ route('pengumuman.update', $x->id) }}"
                                                         method="POST" enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
-                                                        <div class="form-group row">
-                                                            <label for="judul"
-                                                                class="col-sm-3 col-form-label">Judul</label>
-                                                            <div class="col-sm-9">
-                                                                <input type="text" class="form-control" name="judul"
-                                                                    id="judul" placeholder="Judul">
-                                                            </div>
-                                                        </div>
                                                         <div class="form-group row">
                                                             <label for="judul"
                                                                 class="col-sm-3 col-form-label">Foto</label>
@@ -128,12 +125,15 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="judul"
-                                                                class="col-sm-3 col-form-label">Keterangan</label>
+                                                            <label for="judul" class="col-sm-3 col-form-label">Teks</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" class="form-control" name="ket"
-                                                                    id="keterangan_ubah" value="{{ $x->ket }}"
-                                                                    placeholder="Keterangan ">
+                                                                    <textarea class="form-control" name="pengumuman" value="{{ $x->pengumuman }}" >{{ $x->pengumuman }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label for="judul" class="col-sm-3 col-form-label">Keterangan</label>
+                                                            <div class="col-sm-9">
+                                                                <input type="text" class="form-control" name="ket" id="teks" value="{{ $x->ket }}" >
                                                             </div>
                                                         </div>
                                                         <button type="submit"
@@ -150,22 +150,22 @@
                                     {{-- hapus --}}
                                     <div class="modal fade" id="hapus_{{ $x->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
+                                        <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Hapus Foto</h5>
+                                                    <h5 class="modal-title">Hapus Pengumuman</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Yakin Hapus Foto ?
+                                                    Yakin Hapus Pengumuman ?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Batal</button>
-                                                    <form action="{{ route('foto.delete', $x->id) }}" method="POST">
+                                                    <form action="{{ route('pengumuman.delete', $x->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Hapus</button>
@@ -185,9 +185,9 @@
         <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-secondary justify-content-end">
-                    @if ($foto->previousPageUrl())
+                    @if ($pengumuman->previousPageUrl())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $foto->previousPageUrl() }}" aria-label="Previous">
+                            <a class="page-link" href="{{ $pengumuman->previousPageUrl() }}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -195,18 +195,18 @@
 
                     <!-- Nomor Halaman -->
                     @php
-                        $lastPage = min($foto->lastPage(), 3); // Tampilkan maksimal tiga halaman
+                        $lastPage = min($pengumuman->lastPage(), 3); // Tampilkan maksimal tiga halaman
                     @endphp
 
                     @for ($i = 1; $i <= $lastPage; $i++)
-                        <li class="page-item {{ $foto->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $foto->url($i) }}">{{ $i }}</a>
+                        <li class="page-item {{ $pengumuman->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $pengumuman->url($i) }}">{{ $i }}</a>
                         </li>
                     @endfor
 
-                    @if ($foto->nextPageUrl())
+                    @if ($pengumuman->nextPageUrl())
                         <li class="page-item">
-                            <a class="page-link" href="{{ $foto->nextPageUrl() }}" aria-label="Next">
+                            <a class="page-link" href="{{ $pengumuman->nextPageUrl() }}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

@@ -15,6 +15,7 @@
     <link href="{{ asset('template/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}" rel="stylesheet" />
     <link href="{{ asset('template/vendors/ti-icons/css/themify-icons.css') }}" rel="stylesheet" />
     <link type="text/css" href="{{ asset('template/js/select.dataTables.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('tinymce/js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 
 </head>
 
@@ -83,6 +84,13 @@
                     }]);
                 });
             });
+        });
+    </script>
+    <script>
+        tinymce.init({
+            selector: 'textarea', // Replace this CSS selector to match the placeholder element for TinyMCE
+            plugins: 'code table lists',
+            toolbar:  'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
         });
     </script>
 

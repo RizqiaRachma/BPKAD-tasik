@@ -5,7 +5,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Kategori Regulasi</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Kategori Produk Hukum</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -39,7 +39,7 @@
         <div class=" stretch-card">
             <div class="card">
                 <div class="card-body d-flex justify-content-between align-items-center">
-                    <h3>Kategori Informasi Publik</h3>
+                    <h3>Kategori Produk Hukum</h3>
                     <button type="button" class="btn btn-inverse-success btn-fw" data-toggle="modal"
                         data-target="#tambah">Tambah
                         Kategori</button>
