@@ -1,5 +1,6 @@
 @section('beranda')
     {{-- modal --}}
+    @if(count($pengumuman) > 0)
     <div class="modal fade " id="pengumuman" tabindex="-1" aria-labelledby="pengumuman" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-white">
@@ -7,35 +8,28 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {{-- <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
-                        alt="" class="img-fluid" style="height: 100%; width:100%"> --}}
-
                     <div id="berita_terbaru" class="carousel slide custom-carousel carousel-fade " data-bs-ride="carousel">
-
-                        {{-- bubble button --}}
-
-                        {{-- <div class="carousel-indicators ">
-                            <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="0" class="active"
-                                aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-
-                        </div> --}}
                         <div class="carousel-inner h-100" data-bs-interval="100">
-                            <div class="carousel-item active">
-                                <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
-                                    class="d-block w-100 custom-carousel" alt="...">
+                            @foreach ($pengumuman as $key => $x)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                    @if ($x->pengumuman !== null && $x->foto !== null)
+                                        {!! $x->pengumuman !!}
+                                        <div class="d-block w-100 custom-carousel" style="max-width: 100%; height: auto;">
+                                            <img src="{{ asset($x->foto) }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 100%;" alt="...">
+                                        </div>
+                                    @elseif ($x->pengumuman !== null)
+                                        {!! $x->pengumuman !!}
+                                    @elseif ($x->foto !== null)
+                                        <div class="d-block w-100 custom-carousel" style="max-width: 100%; height: auto;">
+                                            <img src="{{ asset($x->foto) }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 100%;" alt="...">
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
 
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="https://images.pexels.com/photos/18578343/pexels-photo-18578343/free-photo-of-a-woman-in-a-white-dress-and-hat-walking-through-a-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                    class="d-block w-100 custom-carousel" alt="...">
-
-                            </div>
                         </div>
                         {{-- button kiri kanan --}}
-                        {{-- <button class="carousel-control-prev" type="button" data-bs-target="#berita_terbaru"
+                        <button class="carousel-control-prev" type="button" data-bs-target="#berita_terbaru"
                             data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
@@ -44,68 +38,47 @@
                             data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
-                        </button> --}}
+                        </button> 
                     </div>
                 </div>
 
             </div>
         </div>
     </div>
+    @endif
 
 
-    {{--  --}}
+    {{-- carousel --}}
     <div class="image-container" id="beranda">
-        <div id="berita_terbaru" class="carousel slide custom-carousel carousel-fade " data-bs-ride="caraousel">
-            <div class="carousel-indicators ">
-                <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#berita_terbaru" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <div id="carousel" class="carousel slide custom-carousel carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                @foreach ($carousel as $key => $x)
+                <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}"></button>
+                @endforeach
             </div>
-            <div class="carousel-inner h-100">
-                <div class="carousel-item active">
-                    <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
-                        class="d-block w-100 custom-carousel" alt="...">
-                    <div class="carousel-caption  bg-glass-card-carousel px-3 text-start">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
-
-
+            <div class="carousel-inner">
+                @foreach ($carousel as $key => $x)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img src="{{ asset($x->foto) }}" class="d-block w-100 custom-carousel" alt="...">
+                    <div class="carousel-caption bg-glass-card-carousel px-3 text-start">
+                        {!! $x->judul !!}
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://avatars.cloudflare.steamstatic.com/d787554503b1712803bb816def2ceb91862680c6_full.jpg"
-                        class="d-block w-100 custom-carousel" alt="...">
-                    <div class="carousel-caption  bg-glass-card-carousel px-3 text-start">
-                        <h5>Second slide label</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, cumque quo
-                            optio, ipsam temporibus eum atque alias modi commodi officiis facilis rerum illo! Rerum aut
-                            voluptate delectus dicta inventore harum.</p>
-
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://images.pexels.com/photos/18578343/pexels-photo-18578343/free-photo-of-a-woman-in-a-white-dress-and-hat-walking-through-a-field.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        class="d-block w-100 custom-carousel" alt="...">
-                    <div class="carousel-caption  bg-glass-card-carousel px-3 text-start">
-                        <h5>Third slide label</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga eum adipisci
-                            fugit labore et, minus quos accusamus ullam voluptatum amet explicabo velit magni, eius omnis
-                            quibusdam iure odio reprehenderit ipsum.</p>
-
-                    </div>
-                </div>
+                @endforeach
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#berita_terbaru" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#berita_terbaru" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
+    
+
+    {{-- link --}}
     <div class="container-fluid  container-beranda-berita ">
         <div class="container-fluid  mb-lg-5 pb-5 ">
             <div class="row text-center g-3 bg-light bg-gradient rounded-3 pb-3">

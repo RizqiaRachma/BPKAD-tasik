@@ -4,11 +4,11 @@
             <p class="h1 text-white">Produk Hukum</p>
         </div>
         <div class="container-fluid d-flex justify-content-end mb-5">
-            <form action="{{ route('berita.cari') }}" method="post">
+            <form action="{{ route('produk_hukum.cari') }}" method="get">
                 @csrf
                 <div class="input-group">
                     <input class="form-control border-end-0 border-top-0 border-start-0 rounded-0  border-light text-white"
-                        type="text" placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header"
+                        type="text" placeholder="Apa yang anda cari ?" name="keyword" id="searchbar-header"
                         style="color: white">
                     <span class="input-group-append">
                         <button
@@ -61,7 +61,7 @@
                                         data-bs-target="#detail-file_{{ $x->id }}"
                                         class="breadcrumb-item link-secondary  text-decoration-none"><i
                                             class="bi bi-eye me-1"></i> Preview</a>
-                                    <p class="breadcrumb-item text-secondary ">Kategori</p>
+                                    <p class="breadcrumb-item text-secondary ">{{ $x->tipe }}</p>
                                 </div>
                             </div>
 
@@ -88,38 +88,43 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
-            <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5 ">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-secondary justify-content-end">
-                        @if ($regulasi->previousPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $regulasi->previousPageUrl() }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        @endif
+            @endforeach<div class="col-12">
+                <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-secondary justify-content-end">
+                            @if ($regulasi->previousPageUrl())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $regulasi->previousPageUrl() }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            @endif
 
-                        <!-- Nomor Halaman -->
-                        @php
-                            $lastPage = min($regulasi->lastPage(), 3); // Tampilkan maksimal tiga halaman
-                        @endphp
+                            <!-- Nomor Halaman -->
+                            @php
+                                $lastPage = min($regulasi->lastPage(), 3); // Tampilkan maksimal tiga halaman
+                            @endphp
 
-                        @for ($i = 1; $i <= $lastPage; $i++)
-                            <li class="page-item {{ $regulasi->currentPage() == $i ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $regulasi->url($i) }}">{{ $i }}</a>
-                            </li>
-                        @endfor
+                            @for ($i = 1; $i <= $lastPage; $i++)
+                                <li class="page-item {{ $regulasi->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link"
+                                        href="{{ $regulasi->appends(['keyword' => request('keyword')])->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
 
-                        @if ($regulasi->nextPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $regulasi->nextPageUrl() }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
+                            @if ($regulasi->nextPageUrl())
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        href="{{ $regulasi->appends(['keyword' => request('keyword')])->nextPageUrl() }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

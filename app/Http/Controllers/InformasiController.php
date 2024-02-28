@@ -99,6 +99,16 @@ class InformasiController extends Controller
         return back()->with('success', 'Data berhasil dihapus.');
     }
 
+    public function cari(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $informasi = Informasi::where('nama_file', 'like', '%' . $keyword . '%')
+            ->orWhere('tipe', 'like', '%' . $keyword . '%')
+            ->paginate(4);
+
+        return view('landing.informasi_publik.informasi_publik', compact('informasi'));
+    }
+
     public function cariDashboard(Request $request)
     {
         $judul = $request->input('judul');

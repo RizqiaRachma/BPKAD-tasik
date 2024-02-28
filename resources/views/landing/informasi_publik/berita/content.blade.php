@@ -4,11 +4,11 @@
             <p class="h1 text-white">Berita & Artikel</p>
         </div>
         <div class="container-fluid d-flex justify-content-end">
-            <form action="{{ route('berita.cari') }}" method="post">
+            <form action="{{ route('berita.cari') }}" method="get">
                 @csrf
                 <div class="input-group">
                     <input class="form-control border-end-0 border-top-0 border-start-0 rounded-0  border-light text-white"
-                        type="text" placeholder="Apa yang anda cari ?" name="judul" id="searchbar-header"
+                        type="text" placeholder="Apa yang anda cari ?" name="keyword" id="searchbar-header"
                         style="color: white">
                     <span class="input-group-append">
                         <button
@@ -34,8 +34,11 @@
                         <div class="card bg-white card-berita mx-auto">
                             <div
                                 class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                                <img id="hat" src="{{ asset($x->thumbnail) }}" alt="{{ $x->judul }}"
-                                    style="width: 80%;">
+                            @if ($x->thumbnail != null)
+                                <img id="hat" src="{{ asset($x->thumbnail) }}" alt="{{ $x->judul }}" style="width: 80%;">
+                            @else
+                                <img id="hat" src="{{ asset($x->foto) }}" alt="{{ $x->judul }}" style="width: 80%;">
+                            @endif
                             </div>
                             <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
                                 <small>{{ $x->kategori }}</small>
@@ -53,38 +56,46 @@
                     </div>
                 @endforeach
             </div>
-            <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination pagination-secondary justify-content-end">
-                        @if ($berita->previousPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $berita->previousPageUrl() }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                        @endif
+            <div class="col-12">
+                <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-secondary justify-content-end">
+                            @if ($berita->previousPageUrl())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $berita->previousPageUrl() }}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                            @endif
 
-                        <!-- Nomor Halaman -->
-                        @php
-                            $lastPage = min($berita->lastPage(), 3); // Tampilkan maksimal tiga halaman
-                        @endphp
+                            <!-- Nomor Halaman -->
+                            @php
+                                $lastPage = min($berita->lastPage(), 3); // Tampilkan maksimal tiga halaman
+                            @endphp
 
-                        @for ($i = 1; $i <= $lastPage; $i++)
-                            <li class="page-item {{ $berita->currentPage() == $i ? 'active' : '' }}">
-                                <a class="page-link" href="{{ $berita->url($i) }}">{{ $i }}</a>
-                            </li>
-                        @endfor
+                            @for ($i = 1; $i <= $lastPage; $i++)
+                                <li class="page-item {{ $berita->currentPage() == $i ? 'active' : '' }}">
+                                    <a class="page-link"
+                                        href="{{ $berita->appends(['keyword' => request('keyword')])->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
 
-                        @if ($berita->nextPageUrl())
-                            <li class="page-item">
-                                <a class="page-link" href="{{ $berita->nextPageUrl() }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        @endif
-                    </ul>
-                </nav>
+                            @if ($berita->nextPageUrl())
+                                <li class="page-item">
+                                    <a class="page-link"
+                                        href="{{ $berita->appends(['keyword' => request('keyword')])->nextPageUrl() }}"
+                                        aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                </div>
             </div>
+        </div>
+
         </div>
     </div>
 @endsection

@@ -20,14 +20,20 @@ class PengumumanController extends Controller
         // Ambil nilai kategori dari Request
         $pengumuman      = $request->input('pengumuman');
         $ket             = $request->input('ket');
-        // Ambil file yang diunggah
-        $file = $request->file('foto');
+        // Periksa apakah file telah diunggah
+        if ($request->hasFile('foto')) {
+            // Ambil file yang diunggah
+            $file = $request->file('foto');
 
-        // Simpan file di folder public/images dengan nama yang unik
-        $filePath = $file->storeAs('public/img/pengumuman', $file->getClientOriginalName());
+            // Simpan file di folder public/images dengan nama yang unik
+            $filePath = $file->storeAs('public/img/pengumuman', $file->getClientOriginalName());
 
-        // Ubah path foto agar sesuai dengan path asset
-        $filePath = str_replace('public/', 'storage/', $filePath);
+            // Ubah path foto agar sesuai dengan path asset
+            $filePath = str_replace('public/', 'storage/', $filePath);
+        } else {
+            // Jika tidak ada file yang diunggah, set filePath menjadi null atau sesuai kebutuhan Anda
+            $filePath = null;
+        }
 
 
         // Simpan data ke dalam tabel kategori_beritas

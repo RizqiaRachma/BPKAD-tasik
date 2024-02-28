@@ -112,16 +112,20 @@ class BeritaController extends Controller
 
     public function cari(Request $request)
     {
-        $judul = $request->input('judul');
-        $berita = Berita::where('judul', 'like', '%' . $judul . '%')->paginate(4); // Sesuaikan dengan struktur tabel Anda
+        $keyword = $request->input('keyword');
+        $berita = Berita::where('judul', 'like', '%' . $keyword . '%')
+            ->orWhere('deskripsi', 'like', '%' . $keyword . '%')
+            ->paginate(4);
 
         return view('landing.informasi_publik.berita.berita', compact('berita'));
     }
 
     public function cariDashboard(Request $request)
     {
-        $judul = $request->input('judul');
-        $berita = Berita::where('judul', 'like', '%' . $judul . '%')->paginate(4); // Sesuaikan dengan struktur tabel Anda
+        $keyword = $request->input('keyword');
+        $berita = Berita::where('judul', 'like', '%' . $keyword . '%')
+            ->orWhere('deskripsi', 'like', '%' . $keyword . '%')
+            ->paginate(4);
         $kategori = Kategori_berita::all();
         return view('dashboard.berita.berita', compact('berita', 'kategori'));
     }

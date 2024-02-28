@@ -99,6 +99,16 @@ class RegulasiController extends Controller
         return back()->with('success', 'Data berhasil dihapus.');
     }
 
+    public function cari(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $regulasi = Regulasi::where('nama_file', 'like', '%' . $keyword . '%')
+            ->orWhere('tipe', 'like', '%' . $keyword . '%')
+            ->paginate(4);
+
+        return view('landing.regulasi.produk_hukum', compact('regulasi'));
+    }
+
     public function cariDashboard(Request $request)
     {
         $judul = $request->input('judul');

@@ -45,24 +45,20 @@ Route::get('/', function () {
     $berita = $response_berita->json(); // Mengubah respon ke format JSON
     $beritaLimited = array_slice($berita['items'], 0, 4);
 
-    $response_pengumuman = Http::get('https://portal.tasikmalayakota.go.id/api/pengumuman');
-    $pengumuman = $response_pengumuman->json(); // Mengubah respon ke format JSON
-    $pengumumanLimited = array_slice($pengumuman['items'], 0, 4);
-
     $berita = Berita::all();
-    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumumanLimited', 'berita'));
+    $carousel = Carousel::all();
+    $pengumuman = Pengumuman::all();
+    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumuman', 'berita', 'carousel'));
 });
 Route::get('/beranda', function () {
     $response_berita = Http::get('https://portal.tasikmalayakota.go.id/api/berita');
     $berita = $response_berita->json(); // Mengubah respon ke format JSON
     $beritaLimited = array_slice($berita['items'], 0, 4);
 
-    $response_pengumuman = Http::get('https://portal.tasikmalayakota.go.id/api/pengumuman');
-    $pengumuman = $response_pengumuman->json(); // Mengubah respon ke format JSON
-    $pengumumanLimited = array_slice($pengumuman['items'], 0, 4);
-
     $berita = Berita::all();
-    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumumanLimited', 'berita'));
+    $carousel = Carousel::all();
+    $pengumuman = Pengumuman::all();
+    return view('landing.beranda.beranda', compact('beritaLimited', 'pengumuman', 'berita', 'carousel'));
 })->name('beranda');
 
 Route::post('/pesan-simpan', [PesanController::class, 'submitForm'])->name('pesan.simpan');
@@ -90,10 +86,11 @@ Route::get('/informasi_publik/renstra', function () {
 //     return view('landing.informasi_publik.informasi_publik', ['berita' => $berita]);
 // })->name('informasi_publik');
 Route::get('/informasi_publik', function () {
-    $kategori = Kategori_berita::all();
-    $berita = Berita::paginate(4);
-    return view('landing.informasi_publik.informasi_publik', ['kategori' => $kategori, 'berita' => $berita]);
+    $kategori = Kategori_informasi::all();
+    $informasi = Informasi::paginate(4);
+    return view('landing.informasi_publik.informasi_publik', ['kategori' => $kategori, 'informasi' => $informasi]);
 });
+Route::get('/informasi-publik-cari', [InformasiController::class, 'cari'])->name('informasi_publik.cari');
 //
 Route::get('/informasi_publik/renja', function () {
     $informasi = Informasi::where('tipe', 'Renja')->paginate(5);
@@ -131,7 +128,7 @@ Route::get('/informasi_publik/berita', function () {
     $berita = Berita::paginate(12);
     return view('landing.informasi_publik.berita.berita', ['berita' => $berita]);
 });
-Route::post('/berita-cari', [BeritaController::class, 'cari'])->name('berita.cari');
+Route::get('/berita-cari', [BeritaController::class, 'cari'])->name('berita.cari');
 Route::get('/informasi_publik/berita/{id}', function ($id) {
     $berita = Berita::all();
     $detailBerita = $berita->firstWhere('id', $id);
@@ -145,9 +142,10 @@ Route::get('/regulasi/peraturan_daerah', function () {
 
 // revisi
 Route::get('/produk_hukum', function () {
-    $regulasi = Regulasi::where('tipe', 'Peraturan Daerah')->paginate(5);
+    $regulasi = Regulasi::paginate(5);
     return view('landing.regulasi.produk_hukum', ['regulasi' => $regulasi]);
 });
+Route::get('/produk-hukum-cari', [RegulasiController::class, 'cari'])->name('produk_hukum.cari');
 //
 // Route::get('/regulasi/peraturan_daerah/nama-file', function () {
 //    return view('landing.regulasi.peraturan_daerah.detail.peraturan_daerah_detail');
