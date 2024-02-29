@@ -86,13 +86,13 @@
                                             </a>
                                         </td>
                                         <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
-                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
-                                                data-bs-target="#pengumuman_{{ $x->id }}">{!! $x->pengumuman !!}</a>
+                                            <a href="javascript:void(0)" class="text-dark" data-toggle="modal"
+                                                data-target="#pengumuman_{{ $x->id }}">{!! $x->pengumuman !!}</a>
                                         </td>
 
                                         <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
-                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
-                                                data-bs-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
+                                            <a href="javascript:void(0)" class="text-dark" data-toggle="modal"
+                                                data-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
                                             </a>
                                         </td>
 
