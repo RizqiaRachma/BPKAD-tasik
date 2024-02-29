@@ -1,5 +1,5 @@
 @section('produk_hukum')
-    <div class="position-relative px-5 mt-4">
+    <div class="position-relative px-5 mt-5">
         <div class="text-center">
             <p class="h1 text-white">Produk Hukum</p>
         </div>
@@ -88,14 +88,14 @@
                         </div>
                     </div>
                 </div>
-            @endforeach<div class="col-12">
+            @endforeach
+            <div class="col-12">
                 <div class="w-100 d-flex justify-content-center justify-content-lg-end mt-5">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination pagination-secondary justify-content-end">
                             @if ($regulasi->previousPageUrl())
                                 <li class="page-item">
-                                    <a class="page-link" href="{{ $regulasi->previousPageUrl() }}"
-                                        aria-label="Previous">
+                                    <a class="page-link" href="{{ $regulasi->previousPageUrl() }}" aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
