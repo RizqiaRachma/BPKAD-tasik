@@ -81,8 +81,8 @@
                                         <td scope="row">{{ $key + 1 }}</td>
                                         <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
 
-                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
-                                                data-bs-target="#judul_{{ $x->id }}"> {!! $x->judul !!}
+                                            <a href="javascript:void(0)" class="text-dark " data-toggle="modal"
+                                                data-target="#judul_{{ $x->id }}"> {!! $x->judul !!}
                                             </a>
                                         </td>
 
@@ -93,8 +93,8 @@
                                             </a>
                                         </td>
                                         <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
-                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
-                                                data-bs-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
+                                            <a href="javascript:void(0)" class="text-dark" data-toggle="modal"
+                                                data-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
                                             </a>
                                         </td>
                                         <td>
@@ -116,7 +116,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLongTitle">Judul</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
+                                                        aria-label="Close" id="close_judul">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
@@ -128,11 +128,11 @@
                                     </div>
                                     {{-- modal detail Keterangan --}}
                                     <div class="modal fade" id="keterangan_{{ $x->id }}" tabindex="-1"
-                                        role="dialog" aria-labelledby="tambah" aria-hidden="true">
+                                        role="dialog" aria-labelledby="keterangan" aria-hidden="true">
                                         <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Teks </h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Carousel</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
