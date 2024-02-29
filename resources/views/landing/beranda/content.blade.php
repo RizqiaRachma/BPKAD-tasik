@@ -19,16 +19,16 @@
                                             <div class="d-flex justify-content-center"
                                                 style="width: 100%; height: auto; overflow: hidden;">
                                                 <img src="{{ asset($x->foto) }}" class="img-fluid "
-                                                    style="width: 35em;height: auto; object-fit:cover;" alt="...">
+                                                    style="width: 25em;height: auto; object-fit:cover;" alt="...">
                                             </div>
                                         @elseif ($x->pengumuman !== null)
                                             <div class="d-flex align-items-center " style="height:100%">
                                                 {!! $x->pengumuman !!}
                                             </div>
                                         @elseif ($x->foto !== null)
-                                            <div class="d-block w-100 ">
+                                            <div class="d-block w-100 text-center">
                                                 <img src="{{ asset($x->foto) }}" class="img-fluid"
-                                                    style="object-fit: cover; width: 100%; height: 100%;" alt="...">
+                                                    style="object-fit: cover; width: 80%; height: 100%;" alt="...">
                                             </div>
                                         @endif
                                     </div>

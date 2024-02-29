@@ -138,7 +138,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    {{ $x->ket }}
+                                                    {!! $x->ket !!}
                                                 </div>
                                             </div>
                                         </div>
