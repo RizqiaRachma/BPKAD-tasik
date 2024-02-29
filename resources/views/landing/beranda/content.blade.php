@@ -68,10 +68,14 @@
             <div class="carousel-inner">
                 @foreach ($carousel as $key => $x)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        @if ($x->judul !== null && $x->foto !== null)
                         <img src="{{ asset($x->foto) }}" class="d-block w-100 custom-carousel" alt="...">
                         <div class="carousel-caption bg-glass-card-carousel px-3 text-start">
                             {!! $x->judul !!}
                         </div>
+                        @else 
+                        <img src="{{ asset($x->foto) }}" class="d-block w-100 custom-carousel" alt="...">
+                        @endif
                     </div>
                 @endforeach
             </div>

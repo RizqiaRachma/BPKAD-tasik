@@ -15,10 +15,10 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="file" class="col-sm-3 col-form-label">Foto</label>
+                            <label for="file" class="col-sm-3 col-form-label">Foto (JPEG/JPG/PNG)</label>
                             <div class="col-sm-9">
                                 <input type="file" class="form-control" name="foto" id="file" placeholder="File"
-                                    accept=".jpeg, .png, .png ">
+                                    accept=".jpeg, .png, .jpg ">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -80,10 +80,15 @@
                                 @foreach ($pengumuman as $key => $x)
                                     <tr>
                                         <td scope="row">{{ $key + 1 }}</td>
-                                        <td> <a href="{{ asset($x->foto) }}" class="image-spotlight">
+                                        <td>
+                                            @if ($x->foto == null)
+                                                Tidak ada gambar
+                                            @else
+                                            <a href="{{ asset($x->foto) }}" class="image-spotlight">
                                                 <img src="{{ asset($x->foto) }}" class="img-fluid"
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
+                                            @endif 
                                         </td>
                                         <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
                                             <a href="javascript:void(0)" class="text-dark" data-toggle="modal"
@@ -164,11 +169,11 @@
                                                         @method('PUT')
                                                         <div class="form-group row">
                                                             <label for="judul"
-                                                                class="col-sm-3 col-form-label">Foto</label>
+                                                                class="col-sm-3 col-form-label">Foto (JPEG/JPG/PNG)</label>
                                                             <div class="col-sm-9">
                                                                 <input type="file" class="form-control" name="foto"
                                                                     id="file_ubah" placeholder="File"
-                                                                    accept=".jpeg, .png, .png ">
+                                                                    accept=".jpeg, .png, .jpg ">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

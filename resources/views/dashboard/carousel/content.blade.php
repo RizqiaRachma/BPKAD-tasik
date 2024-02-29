@@ -176,7 +176,7 @@
                                                             <div class="col-sm-9">
                                                                 <input type="file" class="form-control" name="foto"
                                                                     id="file_ubah" placeholder="File"
-                                                                    accept=".jpeg, .png, .png ">
+                                                                    accept=".jpeg, .png, .jpg ">
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto berita</label>
+                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto berita (JPEG/JPG/PNG)</label>
                             <div class="col-sm-9">
                                 <div class="input-group ">
                                     <input type="file" accept=".jpg, .png, .jpeg" class="form-control file-upload-info"
@@ -208,7 +208,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto</label>
+                            <label for="foto_utama" class="col-sm-3 col-form-label">Foto Berita (JPEG/JPG/PNG)</label>
                             <div class="col-sm-9">
                                 <div class="input-group ">
                                     <input type="file" accept=".jpg, .png, .jpeg" name="foto"
