@@ -1,5 +1,5 @@
 @section('footer')
-    <footer class="row  pt-5 mt-5 text-white d-flex justify-content-center special-footer" id="footer">
+    <footer class="row  pt-5 mt-5 text-white d-flex justify-content-center special-footer " id="footer">
         <div class="col-12 row w-75">
             <div class="col-12 border-white border-bottom mb-3">
                 <div class="row mb-5 d-flex justify-content-center">
@@ -99,17 +99,15 @@
                             class="col-6 col-xxl-12 h5 text-white fw-lighter text-decoration-none link-tautan">SP4N
                             LAPOR</a>
                         <a href="https://portal.tasikmalayakota.go.id/"
-
-                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL TASIKMALAYA</a>
+                            class="col-6 col-xl-12 h5 text-white fw-lighter text-decoration-none link-tautan">PORTAL
+                            TASIKMALAYA</a>
 
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-12 overflow-hidden">
-
-
+        <div class="col-12 ">
             <p id="copyright" class="bottom-0 text-center">©
                 <script>
                     document.write(new Date().getFullYear())

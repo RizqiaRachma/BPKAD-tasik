@@ -1,50 +1,57 @@
 @section('beranda')
     {{-- modal --}}
-    @if(count($pengumuman) > 0)
-    <div class="modal fade " id="pengumuman" tabindex="-1" aria-labelledby="pengumuman" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-white">
-                <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="berita_terbaru" class="carousel slide custom-carousel carousel-fade " data-bs-ride="carousel">
-                        <div class="carousel-inner h-100" data-bs-interval="100">
-                            @foreach ($pengumuman as $key => $x)
-                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                                    @if ($x->pengumuman !== null && $x->foto !== null)
-                                        {!! $x->pengumuman !!}
-                                        <div class="d-block w-100 custom-carousel" style="max-width: 100%; height: auto;">
-                                            <img src="{{ asset($x->foto) }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 100%;" alt="...">
-                                        </div>
-                                    @elseif ($x->pengumuman !== null)
-                                        {!! $x->pengumuman !!}
-                                    @elseif ($x->foto !== null)
-                                        <div class="d-block w-100 custom-carousel" style="max-width: 100%; height: auto;">
-                                            <img src="{{ asset($x->foto) }}" class="img-fluid" style="object-fit: contain; width: 100%; height: 100%;" alt="...">
-                                        </div>
-                                    @endif
-                                </div>
-                            @endforeach
-
-                        </div>
-                        {{-- button kiri kanan --}}
-                        <button class="carousel-control-prev" type="button" data-bs-target="#berita_terbaru"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#berita_terbaru"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button> 
+    @if (count($pengumuman) > 0)
+        <div class="modal fade " id="pengumuman" tabindex="-1" aria-labelledby="pengumuman" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-white">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <div id="pengumuman_modal" class="carousel slide carousel-dark custom-carousel-modal "
+                            data-bs-ride="carousel">
+                            <div class="carousel-inner h-100" data-bs-interval="100">
+                                @foreach ($pengumuman as $key => $x)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }} "
+                                        style="text-align: justify;height:100%">
+                                        @if ($x->pengumuman !== null && $x->foto !== null)
+                                            {!! $x->pengumuman !!}
+                                            <div class="d-flex justify-content-center"
+                                                style="width: 100%; height: auto; overflow: hidden;">
+                                                <img src="{{ asset($x->foto) }}" class="img-fluid "
+                                                    style="width: 35em;height: auto; object-fit:cover;" alt="...">
+                                            </div>
+                                        @elseif ($x->pengumuman !== null)
+                                            <div class="d-flex align-items-center " style="height:100%">
+                                                {!! $x->pengumuman !!}
+                                            </div>
+                                        @elseif ($x->foto !== null)
+                                            <div class="d-block w-100 ">
+                                                <img src="{{ asset($x->foto) }}" class="img-fluid"
+                                                    style="object-fit: cover; width: 100%; height: 100%;" alt="...">
+                                            </div>
+                                        @endif
+                                    </div>
+                                @endforeach
 
+                            </div>
+                            {{-- button kiri kanan --}}
+                            <button class="carousel-control-prev" type="button" data-bs-target="#pengumuman_modal"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#pengumuman_modal"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
     @endif
 
 
@@ -53,17 +60,19 @@
         <div id="carousel" class="carousel slide custom-carousel carousel-fade" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 @foreach ($carousel as $key => $x)
-                <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $key + 1 }}"></button>
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ $key }}"
+                        class="{{ $key == 0 ? 'active' : '' }}" aria-current="{{ $key == 0 ? 'true' : 'false' }}"
+                        aria-label="Slide {{ $key + 1 }}"></button>
                 @endforeach
             </div>
             <div class="carousel-inner">
                 @foreach ($carousel as $key => $x)
-                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img src="{{ asset($x->foto) }}" class="d-block w-100 custom-carousel" alt="...">
-                    <div class="carousel-caption bg-glass-card-carousel px-3 text-start">
-                        {!! $x->judul !!}
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        <img src="{{ asset($x->foto) }}" class="d-block w-100 custom-carousel" alt="...">
+                        <div class="carousel-caption bg-glass-card-carousel px-3 text-start">
+                            {!! $x->judul !!}
+                        </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
@@ -76,7 +85,7 @@
             </button>
         </div>
     </div>
-    
+
 
     {{-- link --}}
     <div class="container-fluid  container-beranda-berita ">
@@ -145,48 +154,48 @@
                     </div>
                 </div>
             @endforeach
-
-            <div class="text-center h1 text-white mb-5">
-                Berita Seputar Kota Tasikmalaya
-            </div>
-            <br><br><br>
-            <div class="row gy-5">
-                @if ($beritaLimited)
-                    @foreach ($beritaLimited as $dataBerita)
-                        <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
-                            <div class="card bg-white card-berita mx-auto">
-                                <div
-                                    class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
-                                    <img id="hat"
-                                        src="https://portal.tasikmalayakota.go.id/assets/uploads/{{ $dataBerita['berita_cover'] }}"
-                                        alt="{{ $x->judul }}" style="width: 80%;">
-                                </div>
-                                <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
-                                    <small>Berita Seputar Kota Tasikmalaya</small>
-                                    <p class="h5 fw-semibold my-2">
-                                        {{ Str::limit($dataBerita['berita_judul'], 40) }}
-                                    </p>
-                                    <p class="h6 fw-medium line-clamp">{!! Str::limit(strip_tags($dataBerita['berita_isi']), 250) !!}</p>
-                                </div>
-                                <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita_detail/{{ $dataBerita['berita_id'] }}"
-                                    class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover"
-                                    target="_blank">
-                                    <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                @else
-                    <p>Data berita tidak tersedia.</p>
-                @endif
-            </div>
-
-
-            <div class="my-3 d-flex justify-content-center align-items-center">
-                <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita"
-                    class="text-white  text-decoration-none h3 arrow-hover" target="_blank">Lihat Berita Lainnya
-                    <span class="h4">
-                        <i class="bi bi-chevron-right"></i></span></a>
-            </div>
         </div>
-    @endsection
+        <div class="text-center h1 text-white mb-5">
+            Berita Seputar Kota Tasikmalaya
+        </div>
+        <br><br><br>
+        <div class="row gy-5 ">
+            @if ($beritaLimited)
+                @foreach ($beritaLimited as $dataBerita)
+                    <div class="col-12 col-md-6 mb-5 mb-xl-5 mb-xxl-0 col-xxl-3 pb-5 position-relative">
+                        <div class="card bg-white card-berita mx-auto">
+                            <div
+                                class="card-header bg-transparent border-0 py-5 mb-5 mt-sm-3 mb-md-5 mb-lg-5 mb-xl-3 mb-xxl-3">
+                                <img id="hat"
+                                    src="https://portal.tasikmalayakota.go.id/assets/uploads/{{ $dataBerita['berita_cover'] }}"
+                                    alt="{{ $x->judul }}" style="width: 80%;">
+                            </div>
+                            <div class="card-body px-4 mt-5 mt-sm-5 mt-md-3 pt-5">
+                                <small>Berita Seputar Kota Tasikmalaya</small>
+                                <p class="h5 fw-semibold my-2">
+                                    {{ Str::limit($dataBerita['berita_judul'], 40) }}
+                                </p>
+                                <p class="h6 fw-medium line-clamp">{!! Str::limit(strip_tags($dataBerita['berita_isi']), 250) !!}</p>
+                            </div>
+                            <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita_detail/{{ $dataBerita['berita_id'] }}"
+                                class="card-footer bg-transparent border-0 text-end text-decoration-none arrow-hover"
+                                target="_blank">
+                                <p class="h-6">Selengkapnya <i class="bi bi-arrow-right"></i></p>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <p>Data berita tidak tersedia.</p>
+            @endif
+        </div>
+
+
+        <div class="my-3 d-flex justify-content-center align-items-center">
+            <a href="https://portal.tasikmalayakota.go.id/index.php/q/berita"
+                class="text-white  text-decoration-none h3 arrow-hover" target="_blank">Lihat Berita Lainnya
+                <span class="h4">
+                    <i class="bi bi-chevron-right"></i></span></a>
+        </div>
+    </div>
+@endsection

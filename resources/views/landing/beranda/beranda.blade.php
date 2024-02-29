@@ -27,7 +27,7 @@
             $('#pengumuman').modal('show');
         });
         $('#pengumuman').carousel({
-            interval: 3000,
+            interval: 2500,
             cycle: true
         });
     </script>

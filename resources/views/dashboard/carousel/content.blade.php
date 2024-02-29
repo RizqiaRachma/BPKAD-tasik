@@ -16,8 +16,8 @@
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Caption</label>
                             <div class="col-sm-9">
-                                <textarea class="form-control" name="judul" ></textarea>
-                        </div>
+                                <textarea class="form-control" name="judul"></textarea>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Foto</label>
@@ -79,7 +79,12 @@
                                 @foreach ($carousel as $key => $x)
                                     <tr>
                                         <td scope="row">{{ $key + 1 }}</td>
-                                        <td>{!! $x->judul !!}</td>
+                                        <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
+
+                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
+                                                data-bs-target="#judul_{{ $x->id }}"> {!! $x->judul !!}
+                                            </a>
+                                        </td>
 
                                         <td>
                                             <a href="{{ asset($x->foto) }}" class="image-spotlight">
@@ -87,7 +92,11 @@
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
                                         </td>
-                                        <td>{{ $x->ket }}</td>
+                                        <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
+                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
+                                                data-bs-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
+                                            </a>
+                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-inverse-warning btn-fw btn-sm"
                                                 data-toggle="modal" data-target="#edit_{{ $x->id }}">Ubah
@@ -99,6 +108,43 @@
 
                                         </td>
                                     </tr>
+                                    {{-- modal detail Judul --}}
+                                    <div class="modal fade" id="judul_{{ $x->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="tambah" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Judul</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {!! $x->judul !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- modal detail Keterangan --}}
+                                    <div class="modal fade" id="keterangan_{{ $x->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="tambah" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Teks </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $x->ket }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     {{-- edit --}}
                                     <div class="modal fade" id="edit_{{ $x->id }}" tabindex="-1" role="dialog"
                                         aria-labelledby="tambah" aria-hidden="true">
@@ -112,15 +158,16 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="forms-sample" action="{{ route('carousel.update', $x->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
+                                                    <form class="forms-sample"
+                                                        action="{{ route('carousel.update', $x->id) }}" method="POST"
+                                                        enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group row">
                                                             <label for="judul"
                                                                 class="col-sm-3 col-form-label">Caption</label>
-                                                                <div class="col-sm-9">
-                                                                    <textarea class="form-control" name="judul" value="{{ $x->judul }}" >{{ $x->judul }}</textarea>
+                                                            <div class="col-sm-9">
+                                                                <textarea class="form-control" name="judul" value="{{ $x->judul }}">{{ $x->judul }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

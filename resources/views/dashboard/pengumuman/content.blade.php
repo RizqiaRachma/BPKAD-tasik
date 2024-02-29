@@ -24,13 +24,14 @@
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Teks</label>
                             <div class="col-sm-9">
-                                    <textarea class="form-control" name="pengumuman" placeholder="silahkan masukan isi pengumuman"></textarea>
+                                <textarea class="form-control" name="pengumuman" placeholder="silahkan masukan isi pengumuman"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="judul" class="col-sm-3 col-form-label">Keterangan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="ket" id="teks" placeholder="Keterangan">
+                                <input type="text" class="form-control" name="ket" id="teks"
+                                    placeholder="Keterangan">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mr-2">Simpan</button>
@@ -69,7 +70,7 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Foto</th>
-                                    <th scope="col">teks</th>
+                                    <th scope="col">Teks</th>
                                     <th scope="col">Keterangan</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
@@ -84,9 +85,17 @@
                                                     style="width:10rem;height:10rem;border-radius:10px; object-fit:contain">
                                             </a>
                                         </td>
-                                        <td>{!! $x->pengumuman !!}</td>
+                                        <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
+                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
+                                                data-bs-target="#pengumuman_{{ $x->id }}">{!! $x->pengumuman !!}</a>
+                                        </td>
 
-                                        <td>{{ $x->ket }}</td>
+                                        <td style="max-width: 10em; overflow: hidden; text-overflow: ellipsis;">
+                                            <a href="javascript:void(0)" class="text-dark" data-bs-toggle="modal"
+                                                data-bs-target="#keterangan_{{ $x->id }}">{{ $x->ket }}
+                                            </a>
+                                        </td>
+
                                         <td>
                                             <button type="button" class="btn btn-inverse-warning btn-fw btn-sm"
                                                 data-toggle="modal" data-target="#edit_{{ $x->id }}">Ubah
@@ -98,21 +107,59 @@
 
                                         </td>
                                     </tr>
-                                    {{-- edit --}}
-                                    <div class="modal fade" id="edit_{{ $x->id }}" tabindex="-1" role="dialog"
-                                        aria-labelledby="tambah" aria-hidden="true">
+                                    {{-- modal detail Pengumuman --}}
+                                    <div class="modal fade" id="pengumuman_{{ $x->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="tambah" aria-hidden="true">
                                         <div class="modal-dialog modal-xl">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Pengumuman</h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Teks </h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form class="forms-sample" action="{{ route('pengumuman.update', $x->id) }}"
-                                                        method="POST" enctype="multipart/form-data">
+                                                    {!! $x->pengumuman !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- modal detail Keterangan --}}
+                                    <div class="modal fade" id="keterangan_{{ $x->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="tambah" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Teks </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ $x->ket }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{-- edit --}}
+                                    <div class="modal fade" id="edit_{{ $x->id }}" tabindex="-1" role="dialog"
+                                        aria-labelledby="tambah" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Ubah Pengumuman
+                                                    </h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="forms-sample"
+                                                        action="{{ route('pengumuman.update', $x->id) }}" method="POST"
+                                                        enctype="multipart/form-data">
                                                         @csrf
                                                         @method('PUT')
                                                         <div class="form-group row">
@@ -125,15 +172,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="judul" class="col-sm-3 col-form-label">Teks</label>
+                                                            <label for="judul"
+                                                                class="col-sm-3 col-form-label">Teks</label>
                                                             <div class="col-sm-9">
-                                                                    <textarea class="form-control" name="pengumuman" value="{{ $x->pengumuman }}" >{{ $x->pengumuman }}</textarea>
+                                                                <textarea class="form-control" name="pengumuman" value="{{ $x->pengumuman }}">{{ $x->pengumuman }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
-                                                            <label for="judul" class="col-sm-3 col-form-label">Keterangan</label>
+                                                            <label for="judul"
+                                                                class="col-sm-3 col-form-label">Keterangan</label>
                                                             <div class="col-sm-9">
-                                                                <input type="text" class="form-control" name="ket" id="teks" value="{{ $x->ket }}" >
+                                                                <input type="text" class="form-control" name="ket"
+                                                                    id="teks" value="{{ $x->ket }}">
                                                             </div>
                                                         </div>
                                                         <button type="submit"
@@ -165,7 +215,8 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Batal</button>
-                                                    <form action="{{ route('pengumuman.delete', $x->id) }}" method="POST">
+                                                    <form action="{{ route('pengumuman.delete', $x->id) }}"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Hapus</button>
